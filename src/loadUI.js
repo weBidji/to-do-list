@@ -29,7 +29,12 @@ export function loadUI() {
     main.textContent = 'this is the main section';
     document.body.appendChild(main);
 
+    const createTaskBtn = document.createElement('button');
+    createTaskBtn.textContent = 'add task';
+    createTaskBtn.id = 'add-btn';
+    main.appendChild(createTaskBtn);
 
+    return createTaskBtn;
 
 }
 
