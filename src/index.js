@@ -1,29 +1,22 @@
 import './style.css';
-import { createTask, createTaskModal } from './createtask.js';
+import { createTaskModal, createTask, openModal, markAsComplete, deleteTask } from './taskhandling.js';
 import { loadUI } from './loadUI.js';
 
 document.addEventListener('DOMContentLoaded', () => {
 
     loadUI();
     createTaskModal();
-    const nameInput = document.getElementById('name-input');
-    const descInput = document.getElementById('desc-input');
-    const submitBtn = document.getElementById('submit-btn');
+    openModal();
 
-
-    
-    const addBtn = document.getElementById('add-btn');
-    const taskModal = document.getElementById('task-modal');
-
-    addBtn.addEventListener('click', () => {
-
-        taskModal.showModal();
-        console.log('enter task details');
-
-    }
-    )
-
+    createTask('laundry', 'wash clothes', '25/07/2024');
+    createTask('dishes', 'wash cutlery and plates', '29/07/2024');
+        markAsComplete();
+        deleteTask();
 })
+
+
+//
+
 
 
 

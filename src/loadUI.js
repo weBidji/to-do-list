@@ -20,8 +20,8 @@ export function loadUI() {
 
     createNavLink('Today', navLinks);
     createNavLink('This week', navLinks);
-    createNavLink('Overdue', navLinks);
-    createNavLink('Completed', navLinks);
+    createNavLink('Projects', navLinks);
+    
 
     // Main
     const main = document.createElement('main');
@@ -29,15 +29,15 @@ export function loadUI() {
     document.body.appendChild(main);
 
     const createTaskBtn = document.createElement('button');
-    createTaskBtn.textContent = 'add task';
+    createTaskBtn.textContent = ' + Add task';
     createTaskBtn.id = 'add-btn';
     main.appendChild(createTaskBtn);
 
     
 
-    return createTaskBtn;
 
 }
+
 
 function createNavLink(text, navLinks) {
     const newLink = document.createElement('a');

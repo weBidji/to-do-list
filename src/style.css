@@ -50,8 +50,8 @@ button:hover {
 #task-modal {
 
     border: none;
-    height: 400px;
-    width: 400px;
+    height: 500px;
+    width: 500px;
     z-index: 2;
     background-color: lightslategray;
     backdrop-filter: blur(2px);
@@ -62,11 +62,26 @@ button:hover {
     top: 0;
     bottom: 0;
     margin: auto;
+    overflow: hidden;
 }
 
 #task-modal::backdrop {
     background: rgba(0, 0, 0, 0.5);
     backdrop-filter: blur(1px);
+}
+
+#top-bar {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    background-color: rgb(124, 133, 130)
+}
+
+#close-button {
+    font-size: 1.3rem;
+    border: none;
+    background-color: none;
 }
 
 form {
@@ -75,4 +90,60 @@ form {
     justify-content: space-evenly;
     align-items: center;
     height: 100%;
+}
+
+.task {
+    height: 60px;
+    margin: 0.8rem auto;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    gap: 1.5rem;
+    align-items: center;
+    width: 90%;
+    background-color: white;
+
+}
+
+.task>* {
+    width: 25%;
+}
+
+.task:hover {
+    transform: scale(1.01);
+    transition: transform 0.2s linear;
+    box-shadow: 0px 2px 12px rgb(70, 69, 69);
+}
+
+.completed-button {
+    margin-left: auto;
+    border: 1px solid green;
+    width: 20px;
+    height: 20px;
+    /*width: fit-content;*/
+    padding: 0.2rem;
+    border-radius: 4px;
+}
+
+.completed-button:hover {
+    transition: background-color linear 0.2s;
+    background-color: lightgreen;
+}
+
+.completed {
+
+    color: grey;
+    text-decoration: line-through;
+
+    transition: color 0.5s linear, text-decoration 0.9s linear;
+}
+
+.edit-button,
+.delete-button {
+    margin-left: auto;
+    background-color: rgb(180, 179, 179);
+    border: none;
+    width: fit-content;
+    padding: 0.2rem;
+    border-radius: 4px;
 }
