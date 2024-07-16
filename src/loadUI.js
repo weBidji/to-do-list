@@ -34,6 +34,8 @@ export function loadUI() {
     createTaskBtn.id = 'add-btn';
     main.appendChild(createTaskBtn);
 
+    
+
     return createTaskBtn;
 
 }
@@ -43,3 +45,4 @@ function createNavLink(text, navLinks) {
     newLink.textContent = text;
     navLinks.appendChild(newLink);
 }
+
