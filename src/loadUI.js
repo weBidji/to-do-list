@@ -26,7 +26,7 @@ export function loadUI() {
     // Main
     const main = document.createElement('section');
     main.id = 'main-section';
-    main.textContent = 'this is the main section';
+    //main.textContent = 'this is the main section';
     document.body.appendChild(main);
 
     const createTaskBtn = document.createElement('button');

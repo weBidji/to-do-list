@@ -1,3 +1,18 @@
+export function showTaskModal() {
+    const taskModal = document.createElement('div');
+    taskModal.id = ('task-modal');
+    document.body.appendChild(taskModal);
+
+    const modalOverlay = document.createElement('div');
+    modalOverlay.id = 'modal-overlay';
+    document.body.appendChild(modalOverlay);
+
+
+
+
+
+}
+
 export function createTask(name, description) {
 
 
@@ -13,7 +28,7 @@ export function createTask(name, description) {
 
     taskName.textContent = name;
     taskDesc.textContent = description;
-    
+
     main.appendChild(createdTask);
     createdTask.appendChild(taskName);
     createdTask.appendChild(taskDesc);
