@@ -24,9 +24,8 @@ export function loadUI() {
     createNavLink('Completed', navLinks);
 
     // Main
-    const main = document.createElement('section');
+    const main = document.createElement('main');
     main.id = 'main-section';
-    //main.textContent = 'this is the main section';
     document.body.appendChild(main);
 
     const createTaskBtn = document.createElement('button');

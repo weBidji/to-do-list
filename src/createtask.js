@@ -6,7 +6,7 @@ export function createTaskModal() {
     document.body.appendChild(taskModal);
     //temporarily show modal to build it
 
-    taskModal.open = true;
+    //taskModal.open = true;
     //modal form
 
     const taskForm = document.createElement('form');
@@ -14,54 +14,77 @@ export function createTaskModal() {
 
     taskModal.appendChild(taskForm);
 
-    const taskNameInput = document.createElement('input');
-    taskNameInput.id = 'name-input';
-    taskNameInput.type = 'text';
-    taskNameInput.name = 'taskName';
-    taskNameInput.placeholder = 'Task Name';
+    const nameInput = document.createElement('input');
+    nameInput.id = 'name-input';
+    nameInput.type = 'text';
+    nameInput.name = 'taskName';
+    nameInput.placeholder = 'Task Name';
 
-    const taskDescInput = document.createElement('input');
-    taskDescInput.id = 'desc-input';
-    taskDescInput.type = 'text';
-    taskDescInput.name = 'taskDescription';
-    taskDescInput.placeholder = 'Task Description';
+    const descInput = document.createElement('input');
+    descInput.id = 'desc-input';
+    descInput.type = 'text';
+    descInput.name = 'taskDescription';
+    descInput.placeholder = 'Task Description';
+
+    const dateInput = document.createElement('input');
+    dateInput.id = 'date-input';
+    dateInput.type = 'date'
 
     const submitButton = document.createElement('button');
-    submitButton.type = 'submit';
+    submitButton.type = 'button';
     submitButton.textContent = 'Add Task';
     submitButton.id = 'submit-btn';
 
 
 
-    taskForm.appendChild(taskNameInput);
-    taskForm.appendChild(taskDescInput);
+    taskForm.appendChild(nameInput);
+    taskForm.appendChild(descInput);
+    taskForm.appendChild(dateInput);
     taskForm.appendChild(submitButton);
+
+    submitButton.addEventListener('click', (e) => {
+        if (nameInput.value === '') {
+            e.preventDefault();
+            alert('Please fill out the task name.');
+        } else {
+            createTask(nameInput.value, descInput.value, dateInput.value);
+            nameInput.value = '';
+            descInput.value = '';
+
+            taskModal.close();
+
+        }
+    })
 
 }
 
-export function createTask(name, description) {
+export function createTask(name, description, date) {
 
 
 
     const createdTask = document.createElement('div');
     const taskName = document.createElement('h3');
     const taskDesc = document.createElement('p');
+    const taskDate = document.createElement('p')
 
     createdTask.classList.add('task');
     taskName.classList.add('task-name');
-    taskDesc.classList.add('class-desc');
+    taskDesc.classList.add('task-desc');
+    taskDate.classList.add('task-date')
     const main = document.getElementById('main-section');
 
     taskName.textContent = name;
     taskDesc.textContent = description;
+    taskDate.textContent = date;
 
     main.appendChild(createdTask);
     createdTask.appendChild(taskName);
     createdTask.appendChild(taskDesc);
-
+    createdTask.appendChild(taskDate);
     return {
         name: name,
         description: description,
+        date: date,
         element: createdTask
     };
 

@@ -11,17 +11,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const submitBtn = document.getElementById('submit-btn');
 
 
-    submitBtn.addEventListener('click', () => {
-        if (nameInput.value === '' || descInput.value === '') {
-            e.preventDefault();
-            alert('Please fill out both the task name and description.');
-        } else {
-            createTask(nameInput.value, descInput.value);
-            nameInput.value = '';
-            descInput.value = '';
-
-        }
-    })
+    
     const addBtn = document.getElementById('add-btn');
     const taskModal = document.getElementById('task-modal');
 
