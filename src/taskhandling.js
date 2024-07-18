@@ -59,7 +59,6 @@ export function createTaskModal() {
     closeButton.addEventListener('click', () => {
         const inputs = taskModal.querySelectorAll('input');
 
-
         inputs.forEach(input => {
             input.value = '';
         });
@@ -109,7 +108,6 @@ export function createTask(name, description, date) {
     taskName.textContent = name;
     taskDesc.textContent = description;
     taskDate.textContent = `(Due: ${date})`;
-    //completedButton.textContent = 'Mark as completed';
     editButton.textContent = 'Edit task'
     deleteButton.textContent = 'Delete'
 
@@ -142,17 +140,17 @@ export function openModal() {
 
 export function markAsComplete() {
 
-    const completeButtons = document.querySelectorAll('.completed-button');
-    completeButtons.forEach((button) => {
+    const main = document.getElementById('main-section');
 
-        button.addEventListener('click', (e) => {
-
-
-            taskToRemove.classList.add('completed');
-            button.style.backgroundColor = 'green';
-
-        })
-    })
+    main.addEventListener('click', (e) => {
+        if (e.target.classList.contains('completed-button')) {
+            console.log('marking as complete');
+            const completedTask = e.target.closest('.task');
+            completedTask.classList.toggle('completed');
+            e.target.classList.toggle('checked')
+            
+        }
+    });
 
 }
 

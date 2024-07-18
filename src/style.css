@@ -23,15 +23,90 @@ nav {
     grid-column: 1/2;
     grid-row: 2/-1;
     color: white;
+    padding-left: 2rem;
 }
 
 #nav-links {
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
-    align-items: center;
+    align-items: flex-start;
     height: 80%;
+    text-align: left;
 }
+
+#projects {
+    /* border: 1px solid blue; */
+    display: flex;
+    flex-direction: row;
+    gap: 2rem;
+    align-items: center;
+}
+
+#add-project-button {
+    width: fit-content;
+    height: auto;
+    font-size: 1.5rem;
+    border-radius: 50%;
+    color: red;
+    border-color: red;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* visibility: hidden; */
+}
+
+#projects-box {
+
+    /* position: relative; */
+    /* transform: translateX(25px); */
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    border: 1px solid black;
+
+}
+
+/* #projects-box::before {
+    content: '';
+    position: absolute;
+    bottom: 10px;
+    left: -10px;
+    height: 200%;
+    border-left: 1px solid black;
+} */
+
+#project-list {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    /* border: 1px solid black; */
+    transform: translateX(25px);
+}
+
+.current-project {
+    position: relative;
+    text-decoration: underline;
+}
+
+/* .current-project::before {
+    content: '';
+    top: 50%;
+    left: -10px;
+    width: 10px;
+    z-index: 4;
+    border-bottom: 1px solid black;
+    position: absolute;
+} */
+
+/*
+#projects:hover {
+    /* cursor: pointer 
+}
+
+#projects:hover #add-project-button {
+    visibility: visible;
+}*/
 
 #main-section {
     grid-column: 2 / -1;
@@ -47,7 +122,8 @@ button:hover {
     cursor: pointer;
 }
 
-#task-modal {
+#task-modal,
+.input-modal {
 
     border: none;
     height: 500px;
@@ -120,7 +196,6 @@ form {
     border: 1px solid green;
     width: 20px;
     height: 20px;
-    /*width: fit-content;*/
     padding: 0.2rem;
     border-radius: 4px;
 }
@@ -128,6 +203,16 @@ form {
 .completed-button:hover {
     transition: background-color linear 0.2s;
     background-color: lightgreen;
+}
+
+.checked {
+    background-color: green;
+}
+
+.checked:hover {
+
+    background-color: green;
+
 }
 
 .completed {
@@ -145,5 +230,5 @@ form {
     border: none;
     width: fit-content;
     padding: 0.2rem;
-    border-radius: 4px;
+    border-radius: 4px
 }

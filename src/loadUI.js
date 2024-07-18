@@ -17,11 +17,13 @@ export function loadUI() {
 
     navLinks.id = 'nav-links';
     navBar.id = 'nav';
-
     createNavLink('Today', navLinks);
     createNavLink('This week', navLinks);
-    createNavLink('Projects', navLinks);
+
+
     
+
+
 
     // Main
     const main = document.createElement('main');
@@ -32,8 +34,6 @@ export function loadUI() {
     createTaskBtn.textContent = ' + Add task';
     createTaskBtn.id = 'add-btn';
     main.appendChild(createTaskBtn);
-
-    
 
 
 }
