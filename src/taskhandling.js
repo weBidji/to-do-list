@@ -1,3 +1,5 @@
+export const tasks = [];
+
 export function createTaskModal() {
 
     //task modal
@@ -73,6 +75,7 @@ export function createTaskModal() {
         } else {
 
             createTask(nameInput.value, descInput.value, dateInput.value);
+            displayTasks();
             nameInput.value = '';
             descInput.value = '';
 
@@ -85,41 +88,89 @@ export function createTaskModal() {
 
 export function createTask(name, description, date) {
 
+    const task = {
+        name: name,
+        description: description,
+        date: date,
+        markComplete: function () {
+            this.completed = true;
+        },
+        edit: function (newName, newDescription, newDate) {
+            this.name = newName;
+            this.description = newDescription;
+            this.date = newDate;
+        },
+        delete: function () {
+            const index = tasks.indexOf(this);
+            if (index > -1) {
+                tasks.splice(index, 1);
+            }
+        }
+    };
 
 
-    const createdTask = document.createElement('div');
-    const taskName = document.createElement('h3');
-    const taskDesc = document.createElement('p');
-    const taskDate = document.createElement('p');
-    const completedButton = document.createElement('button');
-    const editButton = document.createElement('button');
-    const deleteButton = document.createElement('button');
+    task.completed = false;
 
 
-    createdTask.classList.add('task');
-    taskName.classList.add('task-name');
-    taskDesc.classList.add('task-desc');
-    taskDate.classList.add('task-date')
-    completedButton.classList.add('completed-button');
-    editButton.classList.add('edit-button')
-    deleteButton.classList.add('delete-button')
+    tasks.push(task);
+
+
+    return task;
+}
+
+export function displayTasks() {
+
     const main = document.getElementById('main-section');
+    const existingTasks = main.querySelectorAll('.task');
+    existingTasks.forEach(task => task.remove());
 
-    taskName.textContent = name;
-    taskDesc.textContent = description;
-    taskDate.textContent = `(Due: ${date})`;
-    editButton.textContent = 'Edit task'
-    deleteButton.textContent = 'Delete'
+    tasks.forEach((task) => {
+
+        const taskDiv = document.createElement('div');
+        const taskName = document.createElement('h3');
+        const taskDesc = document.createElement('p');
+        const taskDate = document.createElement('p');
+        const completedButton = document.createElement('button');
+        const editButton = document.createElement('button');
+        const deleteButton = document.createElement('button');
+
+
+        taskDiv.classList.add('task');
+        taskName.classList.add('task-name');
+        taskDesc.classList.add('task-desc');
+        taskDate.classList.add('task-date')
+        completedButton.classList.add('completed-button');
+        editButton.classList.add('edit-button')
+        deleteButton.classList.add('delete-button')
+        const main = document.getElementById('main-section');
+
+        taskName.textContent = task.name;;
+        taskDesc.textContent = task.description;
+        taskDate.textContent = `(Due: ${task.date})`;
+        editButton.textContent = 'Edit task'
+        deleteButton.textContent = 'Delete'
 
 
 
-    main.appendChild(createdTask);
-    createdTask.appendChild(completedButton);
-    createdTask.appendChild(taskName);
-    createdTask.appendChild(taskDesc);
-    createdTask.appendChild(taskDate);
-    createdTask.appendChild(editButton);
-    createdTask.appendChild(deleteButton)
+        main.appendChild(taskDiv);
+        taskDiv.appendChild(completedButton);
+        taskDiv.appendChild(taskName);
+        taskDiv.appendChild(taskDesc);
+        taskDiv.appendChild(taskDate);
+        taskDiv.appendChild(editButton);
+        taskDiv.appendChild(deleteButton);
+
+        deleteButton.addEventListener('click', () => {
+            console.log('task removed');
+            task.delete();
+        })
+
+    })
+
+
+
+
+
 
 
 
@@ -148,7 +199,7 @@ export function markAsComplete() {
             const completedTask = e.target.closest('.task');
             completedTask.classList.toggle('completed');
             e.target.classList.toggle('checked')
-            
+
         }
     });
 
@@ -166,6 +217,7 @@ export function deleteTask() {
         }
     });
 }
+
 
 
 

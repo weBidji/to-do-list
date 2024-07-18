@@ -22,7 +22,7 @@ export function projectList() {
 
     addProjectButton.addEventListener('click', () => {
         console.log('adding project to projects list');
-        displayProjectInput();
+        projectInput();
 
     })
 
@@ -34,9 +34,9 @@ export function projectList() {
 
 }
 
-function displayProjectInput() {
+function projectInput() {
 
-    // Form
+    // Form creation
 
     const projectForm = document.createElement('form')
     projectForm.id = 'project-form'
@@ -57,7 +57,7 @@ function displayProjectInput() {
     submitButton.addEventListener('click', (e) => {
         console.log('project added');
         if (projectNameInput.value.trim() === '') {
-            
+
             e.preventDefault();
             alert('please enter a valid project name')
         } else {
@@ -67,15 +67,18 @@ function displayProjectInput() {
         }
     })
 
-    projectNameInput.addEventListener("keypress", function(e) {
-        
+
+     //Submission
+
+    projectNameInput.addEventListener("keypress", function (e) {
+
         if (e.key === "Enter") {
-          
-          e.preventDefault();
-          
-          submitButton.click();
+
+            e.preventDefault();
+
+            submitButton.click();
         }
-      }); 
+    });
 
 }
 
@@ -88,5 +91,7 @@ function createProject(name) {
     project.textContent = name;
     const projectsBox = document.getElementById('projects-box')
     projectsBox.appendChild(project);
+
+    
 
 }
