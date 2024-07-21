@@ -21,14 +21,16 @@ export function projectList() {
     navLinks.appendChild(projectsBox);
 
     addProjectButton.addEventListener('click', () => {
+        
         console.log('adding project to projects list');
         projectInput();
+
 
     })
 
 
-    createProject('Numero uno');
-    createProject('Number two');
+    createProject('Work');
+    createProject('Studies');
 
 
 
@@ -68,7 +70,7 @@ function projectInput() {
     })
 
 
-     //Submission
+    //Submission
 
     projectNameInput.addEventListener("keypress", function (e) {
 
@@ -92,6 +94,8 @@ function createProject(name) {
     const projectsBox = document.getElementById('projects-box')
     projectsBox.appendChild(project);
 
-    
+    //projectsArr.push(name);
+
+
 
 }
