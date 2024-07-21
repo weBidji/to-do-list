@@ -64,8 +64,6 @@ export function createTaskModal() {
     submitButton.textContent = 'Add Task';
     submitButton.id = 'submit-btn';
 
-
-
     taskForm.appendChild(nameInput);
     taskForm.appendChild(descInput);
     taskForm.appendChild(projectInput);
