@@ -160,15 +160,32 @@ export function createTask(name, description, project, date) {
 
 
 export function displayTasks(project) {
+    const main = document.getElementById('main-section');
+
+
 
     let tasksToDisplay;
 
-    const main = document.getElementById('main-section');
+    const titleToDelete = main.querySelector('h2');
+    if (titleToDelete) { titleToDelete.remove(); }
     const existingTasks = main.querySelectorAll('.task');
     existingTasks.forEach(task => task.remove());
 
+
+    const projectTitle = document.createElement('h2');
+    projectTitle.id = 'project-title';
+    if (project === 'all') {
+        projectTitle.textContent = 'All tasks'
+    } else {
+        projectTitle.textContent = project;
+    }
+
+    main.appendChild(projectTitle);
+
+
     if (project === 'all') {
         tasksToDisplay = tasks;
+
     } else {
         tasksToDisplay = tasks.filter(containsProjectName)
     }
@@ -217,10 +234,6 @@ export function displayTasks(project) {
         taskDiv.appendChild(editButton);
         taskDiv.appendChild(deleteButton);
 
-        /*  deleteButton.addEventListener('click', () => {
-              console.log('task removed');
-              task.remove();
-          })*/
 
     })
 
@@ -294,7 +307,7 @@ export function editTask() {
             if (taskIndex > -1) {
                 const task = tasks[taskIndex];
 
-            
+
                 openEditTaskModal(task, taskIndex);
             } else {
                 console.log('Task not found in the array');
@@ -304,23 +317,23 @@ export function editTask() {
 }
 
 function openEditTaskModal(task, taskIndex) {
-    
-   
+
+
     const taskModal = document.createElement('dialog');
     taskModal.id = 'task-modal';
     document.body.appendChild(taskModal);
 
-   
+
     const modalTopBar = document.createElement('div');
     modalTopBar.id = 'top-bar';
     taskModal.appendChild(modalTopBar);
 
-    
+
     const modalTitle = document.createElement('h4');
     modalTitle.textContent = 'Edit task';
     modalTopBar.appendChild(modalTitle);
 
-  
+
     const closeButton = document.createElement('button');
     closeButton.id = 'close-button';
     closeButton.textContent = 'X';

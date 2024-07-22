@@ -12,8 +12,9 @@ document.addEventListener('DOMContentLoaded', () => {
     createTask('dishes', 'wash cutlery and plates', 'Work', '29/07/2024');
     createTask('butter', 'toast', 'Studies', '01/02/2023');
     createTask('fix car', 'windshield', 'Work', '29/07/2024');
-    filterProjects();
     displayTasks('all');
+    filterProjects();
+
     editTask();
     console.log(tasks);
     markAsComplete();
