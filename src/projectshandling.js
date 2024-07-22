@@ -1,3 +1,4 @@
+import { displayTasks } from "./taskhandling";
 export function projectList() {
     const navLinks = document.getElementById('nav-links');
     const projects = document.createElement('div');
@@ -6,8 +7,11 @@ export function projectList() {
     navLinks.appendChild(projects);
 
     const projectsLink = document.createElement('a');
+    projectsLink.id = 'projects-link';
     projectsLink.textContent = 'Projects';
     projects.appendChild(projectsLink);
+
+    projectsLink.addEventListener('click',() => displayTasks('all'));
 
     const addProjectButton = document.createElement('button');
     addProjectButton.id = 'add-project-button';
@@ -94,8 +98,14 @@ function createProject(name) {
     const projectsBox = document.getElementById('projects-box')
     projectsBox.appendChild(project);
 
-    //projectsArr.push(name);
+}
 
+export function filterProjects() {
+    const currentProjects = document.querySelectorAll('.current-project');
 
+    currentProjects.forEach((project) => {
+        const projectName = project.textContent.trim();
 
+        project.addEventListener('click', () => displayTasks(projectName));
+    });
 }

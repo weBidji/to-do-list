@@ -89,6 +89,9 @@ nav {
     text-decoration: underline;
 }
 
+.current-project:hover, #projects-link:hover {
+    cursor:pointer;
+}
 /* .current-project::before {
     content: '';
     top: 50%;
