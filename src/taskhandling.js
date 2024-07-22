@@ -157,10 +157,11 @@ export function createTask(name, description, project, date) {
     return task;
 }
 
-let tasksToDisplay;
+
 
 export function displayTasks(project) {
 
+    let tasksToDisplay;
 
     const main = document.getElementById('main-section');
     const existingTasks = main.querySelectorAll('.task');
@@ -216,10 +217,10 @@ export function displayTasks(project) {
         taskDiv.appendChild(editButton);
         taskDiv.appendChild(deleteButton);
 
-      /*  deleteButton.addEventListener('click', () => {
-            console.log('task removed');
-            task.remove();
-        })*/
+        /*  deleteButton.addEventListener('click', () => {
+              console.log('task removed');
+              task.remove();
+          })*/
 
     })
 
@@ -269,14 +270,175 @@ export function deleteTask() {
             }
 
 
-          // taskToRemove.remove();
-           displayTasks('all');
+            // taskToRemove.remove();
+            displayTasks('all');
 
             console.log(tasks);
         }
     });
 }
 
+export function editTask() {
+    const main = document.getElementById('main-section');
+
+    main.addEventListener('click', (e) => {
+        console.log('Click event on main-section detected');
+
+        if (e.target.classList.contains('edit-button')) {
+            console.log('Editing task');
+
+            const taskToEdit = e.target.closest('.task');
+            const taskName = taskToEdit.querySelector('.task-name').textContent;
+            const taskIndex = tasks.findIndex(task => task.name === taskName);
+
+            if (taskIndex > -1) {
+                const task = tasks[taskIndex];
+
+            
+                openEditTaskModal(task, taskIndex);
+            } else {
+                console.log('Task not found in the array');
+            }
+        }
+    });
+}
+
+function openEditTaskModal(task, taskIndex) {
+    
+   
+    const taskModal = document.createElement('dialog');
+    taskModal.id = 'task-modal';
+    document.body.appendChild(taskModal);
+
+   
+    const modalTopBar = document.createElement('div');
+    modalTopBar.id = 'top-bar';
+    taskModal.appendChild(modalTopBar);
+
+    
+    const modalTitle = document.createElement('h4');
+    modalTitle.textContent = 'Edit task';
+    modalTopBar.appendChild(modalTitle);
+
+  
+    const closeButton = document.createElement('button');
+    closeButton.id = 'close-button';
+    closeButton.textContent = 'X';
+    modalTopBar.appendChild(closeButton);
+
+    // Function to create input elements
+    function createInput(type, name, labelText, value = '') {
+        const label = document.createElement('label');
+        label.htmlFor = name;
+        label.textContent = labelText;
+
+        const createdInput = document.createElement('input');
+        createdInput.type = type;
+        createdInput.id = name;
+        createdInput.name = name;
+        createdInput.value = value;
+
+        const container = document.createElement('div');
+        container.classList.add('form-input');
+        container.appendChild(label);
+        container.appendChild(createdInput);
+
+        return container;
+    }
+
+    // Date formatting function
+
+    function formatDate(date) {
+
+        const dateString = date;
+        const [day, month, year] = dateString.split('/');
+
+
+        const formattedDate = `${year}-${month}-${day}`;
+        return formattedDate;
+
+    }
+
+
+    const taskForm = document.createElement('form');
+    taskForm.method = 'dialog';
+    taskModal.appendChild(taskForm);
+
+    const nameInputDiv = createInput('text', 'name-input', 'Task name:', task.name);
+    const nameInput = nameInputDiv.querySelector('input');
+
+    const descInputDiv = createInput('text', 'desc-input', 'Task details:', task.description);
+    const descInput = descInputDiv.querySelector('input');
+
+
+
+    const projectInputDiv = document.createElement('div');
+    const projectLabel = document.createElement('label');
+    projectLabel.textContent = 'Project:';
+    projectLabel.htmlFor = 'project-input';
+    projectInputDiv.appendChild(projectLabel);
+
+    const projectInput = document.createElement('select');
+    projectInput.name = 'project-input';
+    projectInput.id = 'project-input';
+    projectInputDiv.classList.add('form-input');
+    projectInputDiv.appendChild(projectInput);
+
+    const projectsArr = Array.from(document.querySelectorAll('.current-project'));
+    projectsArr.forEach((project) => {
+        const option = document.createElement('option');
+        option.textContent = project.textContent;
+        option.value = project.textContent;
+        if (project.textContent === task.project) {
+            option.selected = true;
+        }
+        projectInput.appendChild(option);
+    });
+
+    const formattedDate = formatDate(task.date);
+    const dateInputDiv = createInput('date', 'date-input', 'Due date:', formattedDate);
+    const dateInput = dateInputDiv.querySelector('input');
+
+    const submitButton = document.createElement('button');
+    submitButton.type = 'button';
+    submitButton.textContent = 'Save Task';
+    submitButton.id = 'submit-btn';
+
+
+    taskForm.appendChild(nameInputDiv);
+    taskForm.appendChild(descInputDiv);
+    taskForm.appendChild(projectInputDiv);
+    taskForm.appendChild(dateInputDiv);
+    taskForm.appendChild(submitButton);
+
+
+    closeButton.addEventListener('click', () => {
+        taskModal.remove();
+    });
+
+
+    submitButton.addEventListener('click', (e) => {
+        if (nameInput.value === '' || descInput.value === '' || dateInput.value === '') {
+            e.preventDefault();
+            alert('Please fill out the entire form.');
+        } else {
+            console.log(nameInput.value);
+            console.log(dateInput.value);
+            tasks[taskIndex] = {
+                name: nameInput.value,
+                description: descInput.value,
+                project: projectInput.value,
+                date: dateInput.value,
+            };
+
+            console.log(tasks);
+            displayTasks('all');
+            taskModal.remove();
+        }
+    });
+
+    taskModal.showModal();
+}
 
 
 
