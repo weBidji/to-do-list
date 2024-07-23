@@ -1,7 +1,7 @@
 import './style.css';
 import { tasks, createTask, displayTasks, openModal, markAsComplete, deleteTask, editTask } from './taskhandling.js';
 import { loadUI } from './loadUI.js';
-import { projectList, createProject, filterProjects } from './projectshandling.js';
+import { projectList, createProject, filterProjects, deleteProject } from './projectshandling.js';
 document.addEventListener('DOMContentLoaded', () => {
 
     loadUI();
@@ -19,11 +19,12 @@ document.addEventListener('DOMContentLoaded', () => {
     console.log(tasks);
     markAsComplete();
     deleteTask();
+    deleteProject();
 })
 
 
-// Remove project functionality
 
+//Edit project name
 // Data storage
 
 

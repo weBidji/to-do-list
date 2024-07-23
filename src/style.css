@@ -64,6 +64,7 @@ nav {
     flex-direction: column;
     gap: 10px;
     border: 1px solid black;
+    height: fit-content;
 
 }
 
@@ -89,9 +90,11 @@ nav {
     text-decoration: underline;
 }
 
-.current-project:hover, #projects-link:hover {
-    cursor:pointer;
+.current-project:hover,
+#projects-link:hover {
+    cursor: pointer;
 }
+
 /* .current-project::before {
     content: '';
     top: 50%;

@@ -1,4 +1,4 @@
-import { displayTasks } from "./taskhandling";
+import { displayTasks, tasks } from "./taskhandling";
 export function projectList() {
     const navLinks = document.getElementById('nav-links');
     const projects = document.createElement('div');
@@ -11,7 +11,7 @@ export function projectList() {
     projectsLink.textContent = 'Projects';
     projects.appendChild(projectsLink);
 
-    projectsLink.addEventListener('click',() => displayTasks('all'));
+    projectsLink.addEventListener('click', () => displayTasks('all'));
 
     const addProjectButton = document.createElement('button');
     addProjectButton.id = 'add-project-button';
@@ -25,7 +25,7 @@ export function projectList() {
     navLinks.appendChild(projectsBox);
 
     addProjectButton.addEventListener('click', () => {
-        
+
         console.log('adding project to projects list');
         projectInput();
 
@@ -91,12 +91,23 @@ function projectInput() {
 
 function createProject(name) {
 
+    const projectContainer = document.createElement('div');
+    projectContainer.classList.add('project-container');
 
     const project = document.createElement('p');
     project.classList.add('current-project');
     project.textContent = name;
+
+    const deleteProjectButton = document.createElement('button');
+    deleteProjectButton.classList.add('delete-project-button');
+    deleteProjectButton.textContent = 'delete'
+
     const projectsBox = document.getElementById('projects-box')
-    projectsBox.appendChild(project);
+
+    projectsBox.appendChild(projectContainer);
+    projectContainer.appendChild(project);
+    projectContainer.appendChild(deleteProjectButton);
+
 
 }
 
@@ -107,5 +118,31 @@ export function filterProjects() {
         const projectName = project.textContent.trim();
 
         project.addEventListener('click', () => displayTasks(projectName));
+    });
+}
+
+
+
+export function deleteProject() {
+    const deleteProjectButtons = document.querySelectorAll('.delete-project-button');
+
+    deleteProjectButtons.forEach(button => {
+        button.addEventListener('click', (e) => {
+
+            const projectContainer = e.target.closest('.project-container');
+            if (projectContainer) {
+
+                const project = projectContainer.querySelector('.current-project').textContent;
+
+
+                const updatedTasks = tasks.filter(task => task.project !== project);
+                tasks.length = 0;
+                tasks.push(...updatedTasks);
+
+                projectContainer.remove();
+                displayTasks('all');
+            }
+        }
+        );
     });
 }
