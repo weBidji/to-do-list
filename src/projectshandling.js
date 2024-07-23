@@ -1,4 +1,7 @@
 import { displayTasks, tasks } from "./taskhandling";
+
+let projectsArr = []
+
 export function projectList() {
     const navLinks = document.getElementById('nav-links');
     const projects = document.createElement('div');
@@ -91,12 +94,18 @@ function projectInput() {
 
 function createProject(name) {
 
+    const project = { name: name };
+
+    projectsArr.push(project);
+
+    
+
     const projectContainer = document.createElement('div');
     projectContainer.classList.add('project-container');
 
-    const project = document.createElement('p');
-    project.classList.add('current-project');
-    project.textContent = name;
+    const projectName = document.createElement('p');
+    projectName.classList.add('current-project');
+    projectName.textContent = project.name;
 
     const deleteProjectButton = document.createElement('button');
     deleteProjectButton.classList.add('delete-project-button');
@@ -105,8 +114,10 @@ function createProject(name) {
     const projectsBox = document.getElementById('projects-box')
 
     projectsBox.appendChild(projectContainer);
-    projectContainer.appendChild(project);
+    projectContainer.appendChild(projectName);
     projectContainer.appendChild(deleteProjectButton);
+
+
 
 
 }
@@ -142,7 +153,10 @@ export function deleteProject() {
                 projectContainer.remove();
                 displayTasks('all');
             }
+
+
         }
         );
     });
 }
+

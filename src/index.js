@@ -23,9 +23,11 @@ document.addEventListener('DOMContentLoaded', () => {
 })
 
 
-
-//Edit project name
 // Data storage
+
+//clean-up / organise code
+
+//styling
 
 
 

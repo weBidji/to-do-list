@@ -1,4 +1,4 @@
-export const tasks = [];
+export let tasks = [];
 
 export function createTaskModal() {
 
@@ -162,7 +162,12 @@ export function createTask(name, description, project, date) {
 export function displayTasks(project) {
     const main = document.getElementById('main-section');
 
+    let storedTasks = localStorage.getItem('tasks');
+    if (storedTasks) {
+        tasks = JSON.parse(storedTasks);
+    }
 
+    console.log(tasks);
 
     let tasksToDisplay;
 
@@ -186,6 +191,7 @@ export function displayTasks(project) {
     if (project === 'all') {
         tasksToDisplay = tasks;
 
+
     } else {
         tasksToDisplay = tasks.filter(containsProjectName)
     }
@@ -194,6 +200,7 @@ export function displayTasks(project) {
 
         return task.project === project;
     }
+
     tasksToDisplay.forEach((task) => {
 
         const taskDiv = document.createElement('div');
@@ -282,11 +289,10 @@ export function deleteTask() {
                 console.log('Task removed from array');
             }
 
-
-            // taskToRemove.remove();
+            storeTasks();
             displayTasks('all');
 
-            console.log(tasks);
+
         }
     });
 }
@@ -453,6 +459,12 @@ function openEditTaskModal(task, taskIndex) {
     taskModal.showModal();
 }
 
+
+function storeTasks() {
+
+    localStorage.setItem('tasks', JSON.stringify(tasks));
+
+}
 
 
 
