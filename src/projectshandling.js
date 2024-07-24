@@ -1,6 +1,6 @@
-import { displayTasks, tasks } from "./taskhandling";
+import { displayTasks, tasks, storeTasks } from "./taskhandling";
 
-let projectsArr = []
+let projectsArr = [];
 
 export function projectList() {
     const navLinks = document.getElementById('nav-links');
@@ -34,10 +34,6 @@ export function projectList() {
 
 
     })
-
-
-    createProject('Work');
-    createProject('Studies');
 
 
 
@@ -92,34 +88,63 @@ function projectInput() {
 }
 
 
-function createProject(name) {
-
-    const project = { name: name };
-
-    projectsArr.push(project);
-
-    
-
-    const projectContainer = document.createElement('div');
-    projectContainer.classList.add('project-container');
-
-    const projectName = document.createElement('p');
-    projectName.classList.add('current-project');
-    projectName.textContent = project.name;
-
-    const deleteProjectButton = document.createElement('button');
-    deleteProjectButton.classList.add('delete-project-button');
-    deleteProjectButton.textContent = 'delete'
-
-    const projectsBox = document.getElementById('projects-box')
-
-    projectsBox.appendChild(projectContainer);
-    projectContainer.appendChild(projectName);
-    projectContainer.appendChild(deleteProjectButton);
+export function createProject(name) {
 
 
 
 
+    const newProject = { name: name };
+
+    projectsArr.push(newProject);
+
+
+
+
+    //storeProjects();
+    //renderProjects();
+    console.log(projectsArr);
+
+
+
+}
+
+export function renderProjects() {
+    const projectsBox = document.getElementById('projects-box');
+    projectsBox.innerHTML = '';
+
+    let storedProjects = localStorage.getItem('projects');
+    if (storedProjects) {
+
+        projectsArr = JSON.parse(storedProjects);
+        console.log('projects retrieved');
+        console.log(projectsArr);
+
+    };
+
+
+
+    projectsArr.forEach((project) => {
+
+
+        const projectContainer = document.createElement('div');
+        projectContainer.classList.add('project-container');
+
+        const projectName = document.createElement('p');
+        projectName.classList.add('current-project');
+        projectName.textContent = project.name;
+
+        const deleteProjectButton = document.createElement('button');
+        deleteProjectButton.classList.add('delete-project-button');
+        deleteProjectButton.textContent = 'delete'
+
+        const projectsBox = document.getElementById('projects-box')
+
+        projectsBox.appendChild(projectContainer);
+        projectContainer.appendChild(projectName);
+
+        projectContainer.appendChild(deleteProjectButton);
+        deleteProject();
+    })
 }
 
 export function filterProjects() {
@@ -139,19 +164,30 @@ export function deleteProject() {
 
     deleteProjectButtons.forEach(button => {
         button.addEventListener('click', (e) => {
+            console.log('deleting project started')
 
             const projectContainer = e.target.closest('.project-container');
             if (projectContainer) {
 
-                const project = projectContainer.querySelector('.current-project').textContent;
-
-
-                const updatedTasks = tasks.filter(task => task.project !== project);
+                const projectName = projectContainer.querySelector('.current-project').textContent;
+                console.log(projectName);
+                const updatedTasks = tasks.filter(task => task.project !== projectName);
                 tasks.length = 0;
                 tasks.push(...updatedTasks);
+                console.log(tasks);
+                storeTasks();
+
+                const updatedProjects = projectsArr.filter(project => project.name !== projectName);
+                projectsArr.length = 0;
+                projectsArr.push(...updatedProjects)
+                storeProjects();
+
 
                 projectContainer.remove();
+                console.log(projectsArr);
+
                 displayTasks('all');
+                renderProjects();
             }
 
 
@@ -160,3 +196,7 @@ export function deleteProject() {
     });
 }
 
+function storeProjects() {
+
+    localStorage.setItem('projects', JSON.stringify(projectsArr));
+}

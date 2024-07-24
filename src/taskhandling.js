@@ -4,22 +4,22 @@ export function createTaskModal() {
 
     console.log('modal has arrived')
 
-    // Create the task modal
+    // Create  task modal
     const taskModal = document.createElement('dialog');
     taskModal.id = 'task-modal';
     document.body.appendChild(taskModal);
 
-    // Create the top bar
+    // Create top bar
     const modalTopBar = document.createElement('div');
     modalTopBar.id = 'top-bar';
     taskModal.appendChild(modalTopBar);
 
-    // Create and append the title
+    // Create and append title
     const modalTitle = document.createElement('h4');
     modalTitle.textContent = 'Create new task';
     modalTopBar.appendChild(modalTitle);
 
-    // Create and append the close button
+    // Create and append close button
     const closeButton = document.createElement('button');
     closeButton.id = 'close-button';
     closeButton.textContent = 'X';
@@ -44,7 +44,7 @@ export function createTaskModal() {
         return container;
     }
 
-    // Create the form
+    // Create  form
     const taskForm = document.createElement('form');
     taskForm.method = 'dialog';
     taskModal.appendChild(taskForm);
@@ -112,7 +112,7 @@ export function createTaskModal() {
                 date: dateInput.value,
             });
 
-            console.log(tasks);
+            //console.log(tasks);
             displayTasks('all');
             taskModal.remove();
         }
@@ -167,7 +167,7 @@ export function displayTasks(project) {
         tasks = JSON.parse(storedTasks);
     }
 
-    console.log(tasks);
+
 
     let tasksToDisplay;
 
@@ -263,7 +263,6 @@ export function markAsComplete() {
 
     main.addEventListener('click', (e) => {
         if (e.target.classList.contains('completed-button')) {
-            console.log('marking as complete');
             const completedTask = e.target.closest('.task');
             completedTask.classList.toggle('completed');
             e.target.classList.toggle('checked')
@@ -441,8 +440,7 @@ function openEditTaskModal(task, taskIndex) {
             e.preventDefault();
             alert('Please fill out the entire form.');
         } else {
-            console.log(nameInput.value);
-            console.log(dateInput.value);
+
             tasks[taskIndex] = {
                 name: nameInput.value,
                 description: descInput.value,
@@ -450,7 +448,6 @@ function openEditTaskModal(task, taskIndex) {
                 date: dateInput.value,
             };
 
-            console.log(tasks);
             displayTasks('all');
             taskModal.remove();
         }
@@ -460,7 +457,7 @@ function openEditTaskModal(task, taskIndex) {
 }
 
 
-function storeTasks() {
+export function storeTasks() {
 
     localStorage.setItem('tasks', JSON.stringify(tasks));
 
