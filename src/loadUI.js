@@ -10,6 +10,7 @@ export function loadUI() {
     header.appendChild(title);
 
     // Nav
+    
     const navBar = document.createElement('nav');
     document.body.appendChild(navBar);
     const navLinks = document.createElement('ul');

@@ -8,8 +8,7 @@ document.addEventListener('DOMContentLoaded', () => {
     openModal();
     projectList();
 
-    createProject('Work');
-    createProject('Studies');
+
     createTask('laundry', 'wash clothes', 'Studies', '25/07/2024');
     createTask('dishes', 'wash cutlery and plates', 'Work', '29/07/2024');
     createTask('butter', 'toast', 'Studies', '01/02/2023');
@@ -31,6 +30,8 @@ document.addEventListener('DOMContentLoaded', () => {
 //clean-up / organise code
 
 //styling
+
+//default option in dropdown
 
 
 

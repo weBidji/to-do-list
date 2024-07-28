@@ -2,30 +2,30 @@ export let tasks = [];
 
 export function createTaskModal() {
 
-    console.log('modal has arrived')
 
-    // Create  task modal
+    // Modal
     const taskModal = document.createElement('dialog');
     taskModal.id = 'task-modal';
     document.body.appendChild(taskModal);
 
-    // Create top bar
+    // Top bar
     const modalTopBar = document.createElement('div');
     modalTopBar.id = 'top-bar';
     taskModal.appendChild(modalTopBar);
 
-    // Create and append title
-    const modalTitle = document.createElement('h4');
+    // Title
+    const modalTitle = document.createElement('h2');
     modalTitle.textContent = 'Create new task';
     modalTopBar.appendChild(modalTitle);
 
-    // Create and append close button
+    // Close Button
     const closeButton = document.createElement('button');
     closeButton.id = 'close-button';
     closeButton.textContent = 'X';
     modalTopBar.appendChild(closeButton);
 
     // Function to create input elements
+
     function createInput(type, name, labelText) {
         const label = document.createElement('label');
         label.htmlFor = name;
@@ -49,14 +49,15 @@ export function createTaskModal() {
     taskForm.method = 'dialog';
     taskModal.appendChild(taskForm);
 
-    // Create input elements and append to the form
+    // Input elements
     const nameInputDiv = createInput('text', 'name-input', 'Task name:');
     const nameInput = nameInputDiv.querySelector('input');
 
     const descInputDiv = createInput('text', 'desc-input', 'Task details:');
     const descInput = descInputDiv.querySelector('input');
 
-    // Create and append project selection
+    // Project selection
+
     const projectInputDiv = document.createElement('div');
     const projectLabel = document.createElement('label');
     projectLabel.textContent = 'Project:';
@@ -77,6 +78,8 @@ export function createTaskModal() {
         projectInput.appendChild(option);
     });
 
+    //Date input
+
     const dateInputDiv = createInput('date', 'date-input', 'Due date:');
     const dateInput = dateInputDiv.querySelector('input');
 
@@ -85,7 +88,8 @@ export function createTaskModal() {
     submitButton.textContent = 'Add Task';
     submitButton.id = 'submit-btn';
 
-    // Append all created elements to the form
+    // Append created elements
+
     taskForm.appendChild(nameInputDiv);
     taskForm.appendChild(descInputDiv);
     taskForm.appendChild(projectInputDiv);
@@ -108,17 +112,17 @@ export function createTaskModal() {
             tasks.push({
                 name: nameInput.value,
                 description: descInput.value,
-                project: projectInput.value,
+                project:projectInput.value,
                 date: dateInput.value,
             });
 
-            //console.log(tasks);
+            
             displayTasks('all');
             taskModal.remove();
         }
     });
 
-    // Show the modal
+    // Show modal
     taskModal.showModal();
 
 }
@@ -130,7 +134,7 @@ export function createTask(name, description, project, date) {
         description: description,
         project: project,
         date: date,
-        markComplete: function () {
+       /* markComplete: function () {
             this.completed = true;
         },
         edit: function (newName, newDescription, newDate) {
@@ -143,18 +147,11 @@ export function createTask(name, description, project, date) {
             if (index > -1) {
                 tasks.splice(index, 1);
             }
-        }
+        }*/
     };
 
-
-    task.completed = false;
-
-
     tasks.push(task);
-
-
-
-    return task;
+    
 }
 
 

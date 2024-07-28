@@ -64,11 +64,12 @@ function projectInput() {
         if (projectNameInput.value.trim() === '') {
 
             e.preventDefault();
-            alert('please enter a valid project name')
+            alert('please enter a valid project name');
+
         } else {
 
             createProject(projectNameInput.value);
-            projectsBox.removeChild(projectForm);
+            
         }
     })
 
@@ -100,8 +101,8 @@ export function createProject(name) {
 
 
 
-    //storeProjects();
-    //renderProjects();
+    storeProjects();
+    renderProjects();
     console.log(projectsArr);
 
 
@@ -152,6 +153,7 @@ export function filterProjects() {
 
     currentProjects.forEach((project) => {
         const projectName = project.textContent.trim();
+        console.log('yo');
 
         project.addEventListener('click', () => displayTasks(projectName));
     });
