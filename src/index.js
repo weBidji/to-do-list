@@ -1,31 +1,11 @@
 import './style.css';
-import { tasks, createTask, displayTasks, openModal, markAsComplete, deleteTask, editTask } from './taskhandling.js';
-import { loadUI } from './loadUI.js';
-import { projectList, createProject, filterProjects, deleteProject, renderProjects } from './projectshandling.js';
+import { initializeApp } from './init.js';
 document.addEventListener('DOMContentLoaded', () => {
 
-    loadUI();
-    openModal();
-    projectList();
+initializeApp();
 
-
-    createTask('laundry', 'wash clothes', 'Studies', '25/07/2024');
-    createTask('dishes', 'wash cutlery and plates', 'Work', '29/07/2024');
-    createTask('butter', 'toast', 'Studies', '01/02/2023');
-    createTask('fix car', 'windshield', 'Work', '29/07/2024');
-    displayTasks('all');
-    renderProjects();
-    filterProjects();
-
-    editTask();
-    console.log(tasks);
-    markAsComplete();
-    deleteTask();
-    deleteProject();
 })
 
-
-// add project storage
 
 //clean-up / organise code
 

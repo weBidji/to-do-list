@@ -117,7 +117,7 @@ export function createTaskModal() {
             });
 
             
-            displayTasks('all');
+            renderTasks('all');
             taskModal.remove();
         }
     });
@@ -134,45 +134,36 @@ export function createTask(name, description, project, date) {
         description: description,
         project: project,
         date: date,
-       /* markComplete: function () {
-            this.completed = true;
-        },
-        edit: function (newName, newDescription, newDate) {
-            this.name = newName;
-            this.description = newDescription;
-            this.date = newDate;
-        },
-        delete: function () {
-            const index = tasks.indexOf(this);
-            if (index > -1) {
-                tasks.splice(index, 1);
-            }
-        }*/
     };
 
     tasks.push(task);
-    
+
 }
 
 
 
-export function displayTasks(project) {
+export function renderTasks(project) {
+
+
     const main = document.getElementById('main-section');
+
+    //Get tasks from storage before rendering
 
     let storedTasks = localStorage.getItem('tasks');
     if (storedTasks) {
         tasks = JSON.parse(storedTasks);
     }
 
-
-
     let tasksToDisplay;
+
+    // Clear section
 
     const titleToDelete = main.querySelector('h2');
     if (titleToDelete) { titleToDelete.remove(); }
     const existingTasks = main.querySelectorAll('.task');
     existingTasks.forEach(task => task.remove());
 
+    // Title of current project
 
     const projectTitle = document.createElement('h2');
     projectTitle.id = 'project-title';
@@ -185,6 +176,8 @@ export function displayTasks(project) {
     main.appendChild(projectTitle);
 
 
+    // Filter tasks relative to selected project
+
     if (project === 'all') {
         tasksToDisplay = tasks;
 
@@ -196,7 +189,9 @@ export function displayTasks(project) {
     function containsProjectName(task) {
 
         return task.project === project;
-    }
+    };
+
+    // Create, fill and append elements to section
 
     tasksToDisplay.forEach((task) => {
 
@@ -247,8 +242,6 @@ export function openModal() {
     const addBtn = document.getElementById('add-btn');
     addBtn.addEventListener('click', () => {
 
-        console.log('clicked');
-
         createTaskModal();
     }
     )
@@ -263,7 +256,6 @@ export function markAsComplete() {
             const completedTask = e.target.closest('.task');
             completedTask.classList.toggle('completed');
             e.target.classList.toggle('checked')
-
         }
     });
 
@@ -286,7 +278,7 @@ export function deleteTask() {
             }
 
             storeTasks();
-            displayTasks('all');
+            renderTasks('all');
 
 
         }
@@ -297,7 +289,6 @@ export function editTask() {
     const main = document.getElementById('main-section');
 
     main.addEventListener('click', (e) => {
-        console.log('Click event on main-section detected');
 
         if (e.target.classList.contains('edit-button')) {
             console.log('Editing task');
@@ -342,6 +333,7 @@ function openEditTaskModal(task, taskIndex) {
     modalTopBar.appendChild(closeButton);
 
     // Function to create input elements
+
     function createInput(type, name, labelText, value = '') {
         const label = document.createElement('label');
         label.htmlFor = name;
@@ -445,7 +437,7 @@ function openEditTaskModal(task, taskIndex) {
                 date: dateInput.value,
             };
 
-            displayTasks('all');
+            renderTasks('all');
             taskModal.remove();
         }
     });

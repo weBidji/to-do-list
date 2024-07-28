@@ -1,4 +1,4 @@
-import { displayTasks, tasks, storeTasks } from "./taskhandling";
+import { tasks, storeTasks, renderTasks } from "./tasks";
 
 let projectsArr = [];
 
@@ -14,7 +14,7 @@ export function projectList() {
     projectsLink.textContent = 'Projects';
     projects.appendChild(projectsLink);
 
-    projectsLink.addEventListener('click', () => displayTasks('all'));
+    projectsLink.addEventListener('click', () => renderTasks('all'));
 
     const addProjectButton = document.createElement('button');
     addProjectButton.id = 'add-project-button';
@@ -69,7 +69,7 @@ function projectInput() {
         } else {
 
             createProject(projectNameInput.value);
-            
+
         }
     })
 
@@ -92,19 +92,9 @@ function projectInput() {
 export function createProject(name) {
 
 
-
-
     const newProject = { name: name };
-
     projectsArr.push(newProject);
-
-
-
-
-    storeProjects();
-    renderProjects();
     console.log(projectsArr);
-
 
 
 }
@@ -155,7 +145,7 @@ export function filterProjects() {
         const projectName = project.textContent.trim();
         console.log('yo');
 
-        project.addEventListener('click', () => displayTasks(projectName));
+        project.addEventListener('click', () => renderTasks(projectName));
     });
 }
 
@@ -188,7 +178,7 @@ export function deleteProject() {
                 projectContainer.remove();
                 console.log(projectsArr);
 
-                displayTasks('all');
+                renderTasks('all');
                 renderProjects();
             }
 
