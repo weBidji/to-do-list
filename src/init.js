@@ -14,7 +14,7 @@ export function initializeApp() {
     createTask('dishes', 'wash cutlery and plates', 'Work', '29/07/2024');
     createTask('butter', 'toast', 'Studies', '01/02/2023');
     createTask('fix car', 'windshield', 'Work', '29/07/2024');
-    
+
     renderTasks('all');
     renderProjects();
     filterProjects();
@@ -36,7 +36,7 @@ export function loadUI() {
     header.appendChild(title);
 
     // Nav
-    
+
     const navBar = document.createElement('nav');
     document.body.appendChild(navBar);
     const navLinks = document.createElement('ul');
@@ -57,10 +57,15 @@ export function loadUI() {
     main.id = 'main-section';
     document.body.appendChild(main);
 
+    const mainTitleContainer = document.createElement('div');
+    mainTitleContainer.id = ('main-title-container');
+    main.appendChild(mainTitleContainer);
+
     const createTaskBtn = document.createElement('button');
     createTaskBtn.textContent = ' + Add task';
     createTaskBtn.id = 'add-btn';
-    main.appendChild(createTaskBtn);
+    mainTitleContainer.appendChild(createTaskBtn);
+
 
 
 }

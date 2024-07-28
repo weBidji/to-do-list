@@ -9,10 +9,14 @@ export function projectList() {
 
     navLinks.appendChild(projects);
 
+    const projectsLinkContainer = document.createElement('div');
+    projectsLinkContainer.id = 'project-link-container';
+    projects.appendChild(projectsLinkContainer);
+
     const projectsLink = document.createElement('a');
     projectsLink.id = 'projects-link';
     projectsLink.textContent = 'Projects';
-    projects.appendChild(projectsLink);
+    
 
     projectsLink.addEventListener('click', () => renderTasks('all'));
 
@@ -20,8 +24,8 @@ export function projectList() {
     addProjectButton.id = 'add-project-button';
     addProjectButton.textContent = '+';
 
-    projects.appendChild(projectsLink);
-    projects.appendChild(addProjectButton);
+    projectsLinkContainer.appendChild(projectsLink);
+    projectsLinkContainer.appendChild(addProjectButton);
 
     const projectsBox = document.createElement('div');
     projectsBox.id = 'projects-box';
@@ -128,7 +132,7 @@ export function renderProjects() {
 
         const deleteProjectButton = document.createElement('button');
         deleteProjectButton.classList.add('delete-project-button');
-        deleteProjectButton.textContent = 'delete'
+        deleteProjectButton.textContent = 'X'
 
         const projectsBox = document.getElementById('projects-box')
 

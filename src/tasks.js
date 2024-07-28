@@ -112,11 +112,11 @@ export function createTaskModal() {
             tasks.push({
                 name: nameInput.value,
                 description: descInput.value,
-                project:projectInput.value,
+                project: projectInput.value,
                 date: dateInput.value,
             });
 
-            
+
             renderTasks('all');
             taskModal.remove();
         }
@@ -146,6 +146,7 @@ export function renderTasks(project) {
 
 
     const main = document.getElementById('main-section');
+    const mainTitleContainer= document.getElementById('main-title-container');
 
     //Get tasks from storage before rendering
 
@@ -173,7 +174,7 @@ export function renderTasks(project) {
         projectTitle.textContent = project;
     }
 
-    main.appendChild(projectTitle);
+    mainTitleContainer.insertBefore(projectTitle, mainTitleContainer.firstChild);
 
 
     // Filter tasks relative to selected project
@@ -219,7 +220,7 @@ export function renderTasks(project) {
         taskDesc.textContent = task.description;
         taskProject.textContent = task.project;
         taskDate.textContent = `(Due: ${task.date})`;
-        editButton.textContent = 'Edit task'
+        editButton.textContent = 'Edit'
         deleteButton.textContent = 'Delete'
 
 

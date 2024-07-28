@@ -2,12 +2,14 @@ import './style.css';
 import { initializeApp } from './init.js';
 document.addEventListener('DOMContentLoaded', () => {
 
-initializeApp();
+    initializeApp();
 
 })
 
 
+//make dedicated project list container
 
+//sorting by dates 
 
 //styling
 
