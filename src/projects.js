@@ -69,6 +69,8 @@ function projectInput() {
         } else {
 
             createProject(projectNameInput.value);
+            storeProjects();
+            renderProjects();
 
         }
     })
@@ -148,8 +150,6 @@ export function filterProjects() {
         project.addEventListener('click', () => renderTasks(projectName));
     });
 }
-
-
 
 export function deleteProject() {
     const deleteProjectButtons = document.querySelectorAll('.delete-project-button');
