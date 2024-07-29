@@ -6,6 +6,8 @@
     box-sizing: border-box;
 }
 
+
+
 :root {
     --lime-50: #f7fee7;
     --lime-100: #ecfccb;
@@ -24,6 +26,8 @@ body {
     grid-template-columns: repeat(6, 1fr);
     grid-template-rows: 1fr 7fr;
     min-height: 100vh;
+
+    font-family: 'lato', Arial, Helvetica, sans-serif;
 }
 
 header {
@@ -45,18 +49,17 @@ nav {
     grid-column: 1/2;
     grid-row: 2/-1;
     color: black;
-    background-color: var(--lime-200);
+    background-color: antiquewhite;
     padding-left: 2rem;
-
-}
-
-#nav-links {
+    min-height: 100%;
+    border-right: 1px solid var(--lime-300);
     display: flex;
     flex-direction: column;
-    justify-content: space-evenly;
+    justify-content: flex-start;
     align-items: flex-start;
     height: 80%;
     text-align: left;
+
 }
 
 
@@ -66,13 +69,14 @@ nav {
     display: flex;
     flex-direction: column;
     gap: 2rem;
-    align-items: center;
+    margin: 3rem 0 1rem 0;
     /* border: 1px solid black; */
 }
 
 .project-container {
 
     width: 100%;
+    padding-left: 1.5rem;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -95,16 +99,15 @@ nav {
 }
 
 #add-project-button {
-    width: fit-content;
-    height: auto;
-    font-size: 1.5rem;
-    border-radius: 12%;
-    color: red;
-    border-color: red;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    font-size: 2.5rem;
+    color: var(--lime-600);
+    background-color: transparent;
+    transition: transform 0.3s ease-in-out;
 
+}
+
+#add-project-button:hover {
+    transform: translateY(-6px);
 }
 
 #project-link-container {
@@ -119,7 +122,7 @@ nav {
 
 #projects-link {
     font-weight: bold;
-    font-size: 1.25rem;
+    font-size: 1.75rem;
 }
 
 #projects-box {
@@ -136,11 +139,14 @@ nav {
     display: flex;
     flex-direction: column;
     position: relative;
-    /* border: 1px solid black; */
+
     transform: translateX(25px);
 }
 
+.current-project {
 
+    font-size: 1.5rem;
+}
 
 .current-project:hover,
 #projects-link:hover {
@@ -156,6 +162,7 @@ nav {
     flex-direction: column;
     justify-content: flex-start;
     align-items: flex-start;
+    /* background-color: antiquewhite; */
 }
 
 #main-title-container {
@@ -172,10 +179,18 @@ nav {
 
 button {
     border: none;
+    background-color: none;
 }
 
 button:hover {
     cursor: pointer;
+}
+
+#project-title {
+    font-size: 2rem;
+    font-weight: bold;
+
+
 }
 
 #add-btn {
@@ -186,6 +201,7 @@ button:hover {
     font-weight: bold;
     color: white;
 }
+
 
 #task-modal,
 .input-modal {
@@ -233,23 +249,33 @@ form {
     height: 100%;
 }
 
+
+
+
 .task {
-    height: 60px;
-    padding: 0rem 0.5rem;
+    padding: 1rem 0.5rem;
     border-radius: 12px;
     margin: 0.75rem auto;
     display: flex;
     flex-direction: row;
     justify-content: space-evenly;
-    gap: 1.5rem;
     align-items: center;
     width: 90%;
-    background-color: rgb(230, 226, 226);
+    background-color: white;
+
+
 
 }
 
+
 .task>* {
     width: 25%;
+
+}
+
+.task-name {
+    color: black;
+    margin-left: 1.5rem;
 }
 
 .task:hover {
@@ -258,8 +284,23 @@ form {
     box-shadow: 0px 2px 12px rgb(70, 69, 69);
 }
 
+.task-desc {
+    font-family: 'lato', Arial, Helvetica, sans-serif;
+    font-weight: 300;
+    color: rgb(54, 54, 54);
+}
+
+.task-date,
+.task-project {
+    display: flex;
+    flex-direction: row;
+    gap: 0.25rem;
+
+}
+
+
 .completed-button {
-    margin-left: auto;
+    margin-left: 1.25rem;
     border: 1px solid green;
     width: 20px;
     height: 20px;
@@ -284,7 +325,7 @@ form {
 
 .completed {
 
-    color: grey;
+    color: rgb(161, 160, 160) !important;
     text-decoration: line-through;
 
     transition: color 0.5s linear, text-decoration 0.9s linear;
@@ -293,9 +334,53 @@ form {
 .edit-button,
 .delete-button {
     margin-left: auto;
-    background-color: rgb(180, 179, 179);
+    /* background-color: rgb(180, 179, 179); */
     border: none;
     width: fit-content;
     padding: 0.2rem;
-    border-radius: 4px
+    border-radius: 4px;
+    background-color: white;
+    transition: transform 0.25s ease-in-out;
+}
+
+.delete-button {
+    margin-right: auto;
+
+}
+
+.edit-button:hover {
+    transform: scale(1.3);
+
+}
+
+.delete-icon:hover {
+    fill: rgb(143, 1, 1);
+    transform: scale(1.3);
+    transition: transform 0.25s ease-in-out;
+}
+
+svg {
+    height: 20px;
+    width: 25px;
+    /* fill: rgb(167, 5, 5); */
+    /* fill: rgb(54, 54, 54); */
+    fill: black;
+
+}
+
+
+
+@font-face {
+    font-family: 'rubik';
+    src: url(fonts/Rubik-VariableFont_wght.ttf);
+}
+
+@font-face {
+    font-family: 'lato';
+    src: url(fonts/Lato-Regular.ttf);
+}
+
+@font-face {
+    font-family: 'lato thin';
+    src: url(fonts/Lato-Thin.ttf);
 }

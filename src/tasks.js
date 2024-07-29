@@ -137,6 +137,7 @@ export function createTask(name, description, project, date) {
     };
 
     tasks.push(task);
+    storeTasks();
 
 }
 
@@ -146,7 +147,7 @@ export function renderTasks(project) {
 
 
     const main = document.getElementById('main-section');
-    const mainTitleContainer= document.getElementById('main-title-container');
+    const mainTitleContainer = document.getElementById('main-title-container');
 
     //Get tasks from storage before rendering
 
@@ -169,12 +170,12 @@ export function renderTasks(project) {
     const projectTitle = document.createElement('h2');
     projectTitle.id = 'project-title';
     if (project === 'all') {
-        projectTitle.textContent = 'All tasks'
+        projectTitle.textContent = 'All projects'
     } else {
         projectTitle.textContent = project;
     }
 
-    mainTitleContainer.insertBefore(projectTitle, mainTitleContainer.firstChild);
+    mainTitleContainer.appendChild(projectTitle);
 
 
     // Filter tasks relative to selected project
@@ -198,9 +199,9 @@ export function renderTasks(project) {
 
         const taskDiv = document.createElement('div');
         const taskName = document.createElement('h3');
-        const taskDesc = document.createElement('p');
-        const taskProject = document.createElement('p');
-        const taskDate = document.createElement('p');
+        const taskDesc = document.createElement('div');
+        const taskProject = document.createElement('div');
+        const taskDate = document.createElement('div');
         const completedButton = document.createElement('button');
         const editButton = document.createElement('button');
         const deleteButton = document.createElement('button');
@@ -216,12 +217,13 @@ export function renderTasks(project) {
         deleteButton.classList.add('delete-button')
         const main = document.getElementById('main-section');
 
-        taskName.textContent = task.name;
-        taskDesc.textContent = task.description;
-        taskProject.textContent = task.project;
-        taskDate.textContent = `(Due: ${task.date})`;
-        editButton.textContent = 'Edit'
-        deleteButton.textContent = 'Delete'
+        taskName.textContent = capitalizeFirstLetter(task.name);
+        taskDesc.textContent = capitalizeFirstLetter(task.description);
+        taskProject.innerHTML = '<span><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><title>briefcase-outline</title><path d="M20,6C20.58,6 21.05,6.2 21.42,6.59C21.8,7 22,7.45 22,8V19C22,19.55 21.8,20 21.42,20.41C21.05,20.8 20.58,21 20,21H4C3.42,21 2.95,20.8 2.58,20.41C2.2,20 2,19.55 2,19V8C2,7.45 2.2,7 2.58,6.59C2.95,6.2 3.42,6 4,6H8V4C8,3.42 8.2,2.95 8.58,2.58C8.95,2.2 9.42,2 10,2H14C14.58,2 15.05,2.2 15.42,2.58C15.8,2.95 16,3.42 16,4V6H20M4,8V19H20V8H4M14,6V4H10V6H14Z" /></svg></span>' + `<p>${capitalizeFirstLetter(task.project)}</p>`;
+        taskDate.innerHTML = '<span class= "calendar-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 3H18V1H16V3H8V1H6V3H5C3.89 3 3 3.9 3 5V19C3 20.11 3.9 21 5 21H19C20.11 21 21 20.11 21 19V5C21 3.9 20.11 3 19 3M19 19H5V9H19V19M19 7H5V5H19V7Z" /></svg></span>' + `<p>${task.date}</p>`;
+        editButton.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18.13 12L19.39 10.74C19.83 10.3 20.39 10.06 21 10V9L15 3H5C3.89 3 3 3.89 3 5V19C3 20.1 3.89 21 5 21H11V19.13L11.13 19H5V5H12V12H18.13M14 4.5L19.5 10H14V4.5M19.13 13.83L21.17 15.87L15.04 22H13V19.96L19.13 13.83M22.85 14.19L21.87 15.17L19.83 13.13L20.81 12.15C21 11.95 21.33 11.95 21.53 12.15L22.85 13.47C23.05 13.67 23.05 14 22.85 14.19Z" /></svg>'
+
+        deleteButton.innerHTML = '<svg class = "delete-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M6,19A2,2 0 0,0 8,21H16A2,2 0 0,0 18,19V7H6V19M8,9H16V19H8V9M15.5,4L14.5,3H9.5L8.5,4H5V6H19V4H15.5Z" /></svg>'
 
 
 
@@ -236,6 +238,8 @@ export function renderTasks(project) {
 
 
     })
+
+    deleteTask();
 
 }
 
@@ -263,27 +267,35 @@ export function markAsComplete() {
 }
 
 export function deleteTask() {
-    const main = document.getElementById('main-section');
 
-    main.addEventListener('click', (e) => {
-        if (e.target.classList.contains('delete-button')) {
-            console.log('Deleting task');
+    const deleteButtons = document.querySelectorAll('.delete-button');
 
-            const taskToRemove = e.target.closest('.task');
-            const taskName = taskToRemove.querySelector('.task-name').textContent;
-            const taskIndex = tasks.findIndex(task => task.name === taskName);
+    deleteButtons.forEach((button) => {
+        button.addEventListener('click', (e) => {
+            {
+                console.log('Deleting task');
 
-            if (taskIndex > -1) {
-                tasks.splice(taskIndex, 1);
-                console.log('Task removed from array');
+                const taskToRemove = e.target.closest('.task');
+                const taskName = taskToRemove.querySelector('.task-name').textContent.toLowerCase();
+                const taskIndex = tasks.findIndex(task => task.name === taskName);
+
+                if (taskIndex > -1) {
+                    tasks.splice(taskIndex, 1);
+                    console.log('Task removed from array');
+                }
+
+                storeTasks();
+                console.log(tasks);
+                renderTasks('all');
+
+
             }
+        });
 
-            storeTasks();
-            renderTasks('all');
+    })
 
 
-        }
-    });
+
 }
 
 export function editTask() {
@@ -295,7 +307,7 @@ export function editTask() {
             console.log('Editing task');
 
             const taskToEdit = e.target.closest('.task');
-            const taskName = taskToEdit.querySelector('.task-name').textContent;
+            const taskName = taskToEdit.querySelector('.task-name').textContent.toLowerCase();
             const taskIndex = tasks.findIndex(task => task.name === taskName);
 
             if (taskIndex > -1) {
@@ -453,5 +465,10 @@ export function storeTasks() {
 
 }
 
+
+export function capitalizeFirstLetter(string) {
+
+    return string.charAt(0).toUpperCase() + string.slice(1);
+}
 
 

@@ -1,13 +1,13 @@
-import { tasks, storeTasks, renderTasks } from "./tasks";
+import { tasks, storeTasks, renderTasks, capitalizeFirstLetter } from "./tasks";
 
 let projectsArr = [];
 
 export function projectList() {
-    const navLinks = document.getElementById('nav-links');
+    const nav = document.getElementById('nav');
     const projects = document.createElement('div');
     projects.id = 'projects'
 
-    navLinks.appendChild(projects);
+    nav.appendChild(projects);
 
     const projectsLinkContainer = document.createElement('div');
     projectsLinkContainer.id = 'project-link-container';
@@ -29,7 +29,7 @@ export function projectList() {
 
     const projectsBox = document.createElement('div');
     projectsBox.id = 'projects-box';
-    navLinks.appendChild(projectsBox);
+    nav.appendChild(projectsBox);
 
     addProjectButton.addEventListener('click', (e) => {
 
@@ -134,7 +134,7 @@ export function renderProjects() {
 
         const projectName = document.createElement('p');
         projectName.classList.add('current-project');
-        projectName.textContent = project.name;
+        projectName.textContent = capitalizeFirstLetter(project.name);
 
         const deleteProjectButton = document.createElement('button');
         deleteProjectButton.classList.add('delete-project-button');
@@ -150,6 +150,7 @@ export function renderProjects() {
     })
 
     filterProjects();
+    deleteProject();
 }
 
 export function filterProjects() {
@@ -175,7 +176,7 @@ export function deleteProject() {
 
                 const projectName = projectContainer.querySelector('.current-project').textContent;
                 console.log(projectName);
-                const updatedTasks = tasks.filter(task => task.project !== projectName);
+                const updatedTasks = tasks.filter(task => capitalizeFirstLetter(task.project) !== projectName);
                 tasks.length = 0;
                 tasks.push(...updatedTasks);
                 console.log(tasks);
@@ -187,11 +188,13 @@ export function deleteProject() {
                 storeProjects();
 
 
+
                 projectContainer.remove();
                 console.log(projectsArr);
 
                 renderTasks('all');
                 renderProjects();
+
             }
 
 
