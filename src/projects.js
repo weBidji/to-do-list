@@ -16,7 +16,7 @@ export function projectList() {
     const projectsLink = document.createElement('a');
     projectsLink.id = 'projects-link';
     projectsLink.textContent = 'Projects';
-    
+
 
     projectsLink.addEventListener('click', () => renderTasks('all'));
 
@@ -31,11 +31,17 @@ export function projectList() {
     projectsBox.id = 'projects-box';
     navLinks.appendChild(projectsBox);
 
-    addProjectButton.addEventListener('click', () => {
+    addProjectButton.addEventListener('click', (e) => {
 
-        console.log('adding project to projects list');
-        projectInput();
+        const projectForm = document.getElementById('project-form');
 
+        if (projectForm) {
+            e.preventDefault();
+        } else {
+
+            console.log('adding project to projects list');
+            projectInput();
+        }
 
     })
 
@@ -142,6 +148,8 @@ export function renderProjects() {
         projectContainer.appendChild(deleteProjectButton);
         deleteProject();
     })
+
+    filterProjects();
 }
 
 export function filterProjects() {

@@ -39,13 +39,13 @@ export function loadUI() {
 
     const navBar = document.createElement('nav');
     document.body.appendChild(navBar);
-    const navLinks = document.createElement('ul');
+    const navLinks = document.createElement('div');
     navBar.appendChild(navLinks);
 
     navLinks.id = 'nav-links';
     navBar.id = 'nav';
-    createNavLink('Today', navLinks);
-    createNavLink('This week', navLinks);
+    //createNavLink('Today', navLinks);
+    //createNavLink('This week', navLinks);
 
 
 

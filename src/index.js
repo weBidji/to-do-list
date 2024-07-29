@@ -15,6 +15,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
 //default option in dropdown
 
+//uppercase first letter in inputs
+
 
 
 

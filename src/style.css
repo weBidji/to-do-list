@@ -47,7 +47,7 @@ nav {
     color: black;
     background-color: var(--lime-200);
     padding-left: 2rem;
-    /* border-right: 1px solid var(--lime-600) */
+
 }
 
 #nav-links {
@@ -59,12 +59,15 @@ nav {
     text-align: left;
 }
 
+
+
 #projects {
 
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     gap: 2rem;
     align-items: center;
+    /* border: 1px solid black; */
 }
 
 .project-container {
@@ -77,31 +80,46 @@ nav {
 }
 
 .delete-project-button {
-    visibility:hidden;
-    opacity:0;
-    transition:opacity 0.3s ease-in-out;
+    visibility: hidden;
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
 
 }
 
 .project-container:hover .delete-project-button {
-    visibility:visible;
-    opacity:1;
+    visibility: visible;
+    opacity: 1;
     background-color: red;
 
-    
+
 }
 
 #add-project-button {
     width: fit-content;
     height: auto;
     font-size: 1.5rem;
-    border-radius: 50%;
+    border-radius: 12%;
     color: red;
     border-color: red;
     display: flex;
     align-items: center;
     justify-content: center;
 
+}
+
+#project-link-container {
+
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+    width: fit-content;
+}
+
+#projects-link {
+    font-weight: bold;
+    font-size: 1.25rem;
 }
 
 #projects-box {
@@ -114,8 +132,6 @@ nav {
 
 }
 
-
-
 #project-list {
     display: flex;
     flex-direction: column;
@@ -124,10 +140,7 @@ nav {
     transform: translateX(25px);
 }
 
-.current-project {
-    position: relative;
 
-}
 
 .current-project:hover,
 #projects-link:hover {
@@ -169,7 +182,7 @@ button:hover {
     background-color: var(--lime-700);
     border: none;
     padding: 0.5rem;
-    border-radius: 12%;
+    border-radius: 8px;
     font-weight: bold;
     color: white;
 }
