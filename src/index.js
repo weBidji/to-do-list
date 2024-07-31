@@ -6,16 +6,21 @@ document.addEventListener('DOMContentLoaded', () => {
 
 })
 
+// style project input 
+
+//style modal
+
+//fix deleted tasks reappearing after refresh
+//set up all event listeners
 
 //make dedicated project list container
 
 //sorting by dates 
-
+ //setup all even
 //styling
 
 //default option in dropdown
 
-//uppercase first letter in inputs
 
 
 

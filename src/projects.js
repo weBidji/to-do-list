@@ -49,7 +49,7 @@ export function projectList() {
 
 }
 
-function projectInput() {
+export function projectInput() {
 
     // Form creation
 
@@ -58,7 +58,10 @@ function projectInput() {
 
     const projectNameInput = document.createElement('input');
     projectNameInput.type = 'text';
+    projectNameInput.id = 'project-name-input';
+    projectNameInput.classList.add('text-input');
     const submitButton = document.createElement('button');
+    submitButton.id = 'submit-project-button';
     submitButton.textContent = 'Add project';
     submitButton.type = 'button';
 
@@ -68,6 +71,8 @@ function projectInput() {
     projectsBox.appendChild(projectForm);
     projectForm.appendChild(projectNameInput);
     projectForm.appendChild(submitButton);
+
+    projectNameInput.focus();
 
     submitButton.addEventListener('click', (e) => {
         console.log('project added');
@@ -107,6 +112,7 @@ export function createProject(name) {
     const newProject = { name: name };
     projectsArr.push(newProject);
     console.log(projectsArr);
+    deleteProject();
 
 
 }
@@ -138,7 +144,7 @@ export function renderProjects() {
 
         const deleteProjectButton = document.createElement('button');
         deleteProjectButton.classList.add('delete-project-button');
-        deleteProjectButton.textContent = 'X'
+        deleteProjectButton.innerHTML = '<svg class = "delete-project-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M6,19A2,2 0 0,0 8,21H16A2,2 0 0,0 18,19V7H6V19M8,9H16V19H8V9M15.5,4L14.5,3H9.5L8.5,4H5V6H19V4H15.5Z" /></svg>'
 
         const projectsBox = document.getElementById('projects-box')
 

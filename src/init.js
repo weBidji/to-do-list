@@ -1,8 +1,7 @@
-import { createTask, renderTasks, openModal, markAsComplete, deleteTask, editTask } from './tasks.js';
-import { createProject, projectList, renderProjects, filterProjects, deleteProject } from './projects.js';
+import { createTask, renderTasks, openModal, markAsComplete, deleteTask, editTask, createTaskModal } from './tasks.js';
+import { createProject, projectList, renderProjects, filterProjects, deleteProject, projectInput } from './projects.js';
 
 export function initializeApp() {
-
 
     loadUI();
     projectList();
@@ -14,6 +13,7 @@ export function initializeApp() {
     createTask('dishes', 'wash cutlery and plates', 'Work', '29/07/2024');
     createTask('butter', 'toast', 'Studies', '01/02/2023');
     createTask('fix car', 'windshield', 'Work', '29/07/2024');
+    // createTaskModal();
 
     renderTasks('all');
     renderProjects();
@@ -22,6 +22,7 @@ export function initializeApp() {
     markAsComplete();
     deleteTask();
     deleteProject();
+    projectInput();
 }
 
 export function loadUI() {
@@ -39,13 +40,8 @@ export function loadUI() {
 
     const navBar = document.createElement('nav');
     document.body.appendChild(navBar);
-    /* const navLinks = document.createElement('div');
-     navBar.appendChild(navLinks);
- */
-    // navLinks.id = 'nav-links';
     navBar.id = 'nav';
-    //createNavLink('Today', navLinks);
-    //createNavLink('This week', navLinks);
+
 
 
 
@@ -65,16 +61,9 @@ export function loadUI() {
     const createTaskBtn = document.createElement('button');
     createTaskBtn.textContent = ' + Add task';
     createTaskBtn.id = 'add-btn';
-    mainTitleContainer.appendChild(createTaskBtn);
+    main.appendChild(createTaskBtn);
 
 
 
 }
-
-/*
-function createNavLink(text, navLinks) {
-    const newLink = document.createElement('a');
-    newLink.textContent = text;
-    navLinks.appendChild(newLink);
-}*/
 

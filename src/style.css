@@ -21,6 +21,19 @@
     --lime-900: #365314;
 }
 
+svg {
+    height: 20px;
+    width: 25px;
+    /* fill: rgb(167, 5, 5); */
+    /* fill: rgb(54, 54, 54); */
+    fill: black;
+
+}
+
+button {
+    font-family: 'lato', Arial, Helvetica, sans-serif;
+}
+
 body {
     display: grid;
     grid-template-columns: repeat(6, 1fr);
@@ -36,40 +49,45 @@ header {
     display: flex;
     align-items: center;
     justify-content: flex-start;
-    /* border-bottom: 1px solid var(--lime-600); */
     background-color: var(--lime-300);
+    z-index: 2;
 }
 
 h1 {
 
     margin-left: 2rem;
+    border-left: 2px solid black;
+    padding-left: 1rem;
+    font-size: 2rem;
 }
 
 nav {
     grid-column: 1/2;
     grid-row: 2/-1;
     color: black;
-    background-color: antiquewhite;
     padding-left: 2rem;
     min-height: 100%;
-    border-right: 1px solid var(--lime-300);
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
     align-items: flex-start;
     height: 80%;
     text-align: left;
+    /* border-right: 1px solid rgb(49, 49, 49); */
+    box-shadow: 0px 0px 4px black;
+    z-index: 1;
 
 }
 
-
+/* PROJECTS */
 
 #projects {
 
     display: flex;
     flex-direction: column;
     gap: 2rem;
-    margin: 3rem 0 1rem 0;
+    margin: 0rem 0 1rem 0;
+    padding-top: 1.75rem;
     /* border: 1px solid black; */
 }
 
@@ -80,20 +98,35 @@ nav {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: 2rem;
+    gap: 1rem;
 }
 
 .delete-project-button {
     visibility: hidden;
+    height: 20px;
+    width: 20px;
+    border-radius: 4px;
     opacity: 0;
     transition: opacity 0.3s ease-in-out;
+    font-size: 1rem;
+    color: white;
+    background-color: transparent;
 
+}
+
+.delete-project-icon {
+    fill: red;
+}
+
+.delete-project-button:hover {
+    transform: scale(1.2);
+    transition: transform 0.1s ease-in-out;
 }
 
 .project-container:hover .delete-project-button {
     visibility: visible;
     opacity: 1;
-    background-color: red;
+    /* background-color: red; */
 
 
 }
@@ -118,11 +151,12 @@ nav {
     align-items: center;
     gap: 1rem;
     width: fit-content;
+    /* border-bottom: 2px solid rgb(46, 45, 45); */
 }
 
 #projects-link {
     font-weight: bold;
-    font-size: 1.75rem;
+    font-size: 1.5rem;
 }
 
 #projects-box {
@@ -139,19 +173,61 @@ nav {
     display: flex;
     flex-direction: column;
     position: relative;
-
-    transform: translateX(25px);
 }
 
 .current-project {
 
-    font-size: 1.5rem;
+    font-size: 1.25rem;
 }
 
 .current-project:hover,
 #projects-link:hover {
     cursor: pointer;
+    transform: scale(1.1);
+    transition: transform 0.1s ease-in-out;
 }
+
+#project-form {
+    /* border: 1px solid black; */
+    display: block;
+    margin-left: 1.5rem;
+
+
+}
+
+#project-name-input {
+    border: 2px solid rgb(179, 177, 177);
+    border-radius: 6px;
+    margin-bottom: 0.25rem;
+    font-size: 1.25rem;
+    max-width: 150px;
+    padding: 0.25rem;
+
+}
+
+#submit-project-button {
+    display: block;
+    margin: 0 auto;
+    border-radius: 12px;
+    border: 2px solid var(--lime-800);
+    background-color: transparent;
+    color: var(--lime-800);
+    padding: 0.25rem 0.5rem;
+    font-size: 1.125rem;
+    border-radius: 8px;
+    font-weight: 900;
+}
+
+#submit-project-button:hover {
+    text-decoration: underline;
+}
+
+
+input:focus {
+    outline: none
+}
+
+/* MAIN / TASKS */
 
 
 
@@ -162,7 +238,8 @@ nav {
     flex-direction: column;
     justify-content: flex-start;
     align-items: flex-start;
-    /* background-color: antiquewhite; */
+    background-color: rgb(240, 240, 240);
+    padding-top: 1.5rem;
 }
 
 #main-title-container {
@@ -172,7 +249,6 @@ nav {
     align-items: center;
     justify-content: flex-start;
     gap: 2rem;
-
     margin: 0.75rem auto;
 
 }
@@ -187,21 +263,38 @@ button:hover {
 }
 
 #project-title {
-    font-size: 2rem;
+    font-size: 1.75rem;
     font-weight: bold;
+    border-bottom: 2px solid rgb(109, 109, 109);
+    padding-right: 4rem;
+    padding-bottom: 0.5rem;
 
 
 }
 
 #add-btn {
-    background-color: var(--lime-700);
-    border: none;
-    padding: 0.5rem;
-    border-radius: 8px;
+
+    padding: 0.75rem 0.5rem;
+    border-radius: 12px;
+    border: 2px solid rgb(179, 177, 177);
+    margin: 0.5rem auto;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+    width: 90%;
+    background-color: white;
+    font-size: 1.125rem;
     font-weight: bold;
-    color: white;
+
 }
 
+#add-btn:hover {
+    transition: transform 0.2s linear;
+    box-shadow: 0px 0px 6px rgb(70, 69, 69);
+    transition: box-shadow 0.025s ease-in-out;
+    text-decoration: underline;
+}
 
 #task-modal,
 .input-modal {
@@ -253,15 +346,17 @@ form {
 
 
 .task {
-    padding: 1rem 0.5rem;
+    padding: 0.75rem 0.5rem;
     border-radius: 12px;
-    margin: 0.75rem auto;
+    border: 2px solid rgb(179, 177, 177);
+    margin: 0.5rem auto;
     display: flex;
     flex-direction: row;
     justify-content: space-evenly;
     align-items: center;
     width: 90%;
     background-color: white;
+    font-size: 1rem;
 
 
 
@@ -275,13 +370,13 @@ form {
 
 .task-name {
     color: black;
-    margin-left: 1.5rem;
+    margin-left: 1.25rem;
 }
 
 .task:hover {
-    transform: scale(1.01);
     transition: transform 0.2s linear;
-    box-shadow: 0px 2px 12px rgb(70, 69, 69);
+    box-shadow: 0px 0px 6px rgb(70, 69, 69);
+    transition: box-shadow 0.025s ease-in-out;
 }
 
 .task-desc {
@@ -315,6 +410,7 @@ form {
 
 .checked {
     background-color: green;
+    opacity: 1 !important;
 }
 
 .checked:hover {
@@ -324,11 +420,11 @@ form {
 }
 
 .completed {
-
-    color: rgb(161, 160, 160) !important;
-    text-decoration: line-through;
-
-    transition: color 0.5s linear, text-decoration 0.9s linear;
+    position: relative;
+    /* color: rgb(161, 160, 160); */
+    transition: color 0.5s linear, text-decoration 0.9s linear, opacity 0.5s ease-in-out;
+    border: 2px solid var(--lime-500);
+    transition: border-color 0.1s ease-in-out;
 }
 
 .edit-button,
@@ -359,14 +455,7 @@ form {
     transition: transform 0.25s ease-in-out;
 }
 
-svg {
-    height: 20px;
-    width: 25px;
-    /* fill: rgb(167, 5, 5); */
-    /* fill: rgb(54, 54, 54); */
-    fill: black;
 
-}
 
 
 
