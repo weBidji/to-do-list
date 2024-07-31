@@ -32,7 +32,7 @@ export function loadUI() {
     const header = document.createElement('header');
     const title = document.createElement('h1');
 
-    title.innerHTML = 'To-Do List'
+    title.innerHTML = 'To-Do'
     document.body.appendChild(header);
     header.appendChild(title);
 
