@@ -16,7 +16,7 @@ document.addEventListener('DOMContentLoaded', () => {
 //make dedicated project list container
 
 //sorting by dates 
- //setup all even
+//setup all even
 //styling
 
 //default option in dropdown

@@ -39,8 +39,8 @@ export function projectList() {
             e.preventDefault();
         } else {
 
-            console.log('adding project to projects list');
-            projectInput();
+
+            showProjectInput();
         }
 
     })
@@ -49,7 +49,7 @@ export function projectList() {
 
 }
 
-export function projectInput() {
+export function showProjectInput() {
 
     // Form creation
 
@@ -75,7 +75,7 @@ export function projectInput() {
     projectNameInput.focus();
 
     submitButton.addEventListener('click', (e) => {
-        console.log('project added');
+
         if (projectNameInput.value.trim() === '') {
 
             e.preventDefault();
@@ -111,8 +111,6 @@ export function createProject(name) {
 
     const newProject = { name: name };
     projectsArr.push(newProject);
-    console.log(projectsArr);
-    deleteProject();
 
 
 }
@@ -125,8 +123,7 @@ export function renderProjects() {
     if (storedProjects) {
 
         projectsArr = JSON.parse(storedProjects);
-        console.log('projects retrieved');
-        console.log(projectsArr);
+
 
     };
 
@@ -152,11 +149,11 @@ export function renderProjects() {
         projectContainer.appendChild(projectName);
 
         projectContainer.appendChild(deleteProjectButton);
-        deleteProject();
+        deleteProjectEventListener();
     })
 
     filterProjects();
-    deleteProject();
+
 }
 
 export function filterProjects() {
@@ -164,31 +161,29 @@ export function filterProjects() {
 
     currentProjects.forEach((project) => {
         const projectName = project.textContent.trim();
-        console.log('yo');
 
         project.addEventListener('click', () => renderTasks(projectName));
     });
 }
 
-export function deleteProject() {
+export function deleteProjectEventListener() {
     const deleteProjectButtons = document.querySelectorAll('.delete-project-button');
 
     deleteProjectButtons.forEach(button => {
         button.addEventListener('click', (e) => {
-            console.log('deleting project started')
+
 
             const projectContainer = e.target.closest('.project-container');
             if (projectContainer) {
 
                 const projectName = projectContainer.querySelector('.current-project').textContent;
-                console.log(projectName);
+
                 const updatedTasks = tasks.filter(task => capitalizeFirstLetter(task.project) !== projectName);
                 tasks.length = 0;
                 tasks.push(...updatedTasks);
-                console.log(tasks);
                 storeTasks();
 
-                const updatedProjects = projectsArr.filter(project => project.name !== projectName);
+                const updatedProjects = projectsArr.filter(project => capitalizeFirstLetter(project.name) !== projectName);
                 projectsArr.length = 0;
                 projectsArr.push(...updatedProjects)
                 storeProjects();
@@ -196,7 +191,7 @@ export function deleteProject() {
 
 
                 projectContainer.remove();
-                console.log(projectsArr);
+
 
                 renderTasks('all');
                 renderProjects();

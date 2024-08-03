@@ -1,28 +1,28 @@
-import { createTask, renderTasks, openModal, markAsComplete, deleteTask, editTask, createTaskModal } from './tasks.js';
-import { createProject, projectList, renderProjects, filterProjects, deleteProject, projectInput } from './projects.js';
+import { createTask, renderTasks, openModal, markAsComplete, deleteTask, editTaskEventListener, createTaskModal } from './tasks.js';
+import { createProject, projectList, renderProjects, filterProjects, deleteProjectEventListener, showProjectInput } from './projects.js';
 
 export function initializeApp() {
 
     loadUI();
     projectList();
     openModal();
-
+/*
     createProject('Studies');
     createProject('Work');
     createTask('laundry', 'wash clothes', 'Studies', '25/07/2024');
     createTask('dishes', 'wash cutlery and plates', 'Work', '29/07/2024');
     createTask('butter', 'toast', 'Studies', '01/02/2023');
     createTask('fix car', 'windshield', 'Work', '29/07/2024');
-    // createTaskModal();
 
+*/
     renderTasks('all');
     renderProjects();
     filterProjects();
-    editTask();
+    editTaskEventListener();
     markAsComplete();
     deleteTask();
-    deleteProject();
-    projectInput();
+    // showProjectInput();
+    // createTaskModal();
 }
 
 export function loadUI() {
