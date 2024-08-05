@@ -125,6 +125,24 @@ export function createTaskModal() {
         }
     });
 
+    //enter key use 
+
+    const inputs = taskForm.querySelectorAll('input');
+
+    inputs.forEach((input) => {
+
+        input.addEventListener("keypress", function (e) {
+
+            if (e.key === "Enter") {
+    
+                e.preventDefault();
+                console.log('submitting')
+                submitButton.click();
+            }
+        });
+
+    })
+
     // Show modal
     taskModal.showModal();
 
@@ -150,7 +168,6 @@ export function createTask(name, description, project, date) {
 
 export function renderTasks(project) {
 
-    console.log('rendering');
     const main = document.getElementById('main-section');
     const mainTitleContainer = document.getElementById('main-title-container');
 
@@ -334,7 +351,7 @@ export function editTaskEventListener() {
             console.log('Editing task');
 
             const taskToEdit = e.target.closest('.task');
-            const taskName = taskToEdit.querySelector('.task-name').textContent.toLowerCase();
+            const taskName = taskToEdit.querySelector('.task-name').textContent;
             const taskIndex = tasks.findIndex(task => task.name === taskName);
 
             if (taskIndex > -1) {
@@ -470,18 +487,36 @@ function openEditTaskModal(task, taskIndex) {
             e.preventDefault();
             alert('Please fill out the entire form.');
         } else {
-
+            console.log('task modified');
             tasks[taskIndex] = {
                 name: nameInput.value,
                 description: descInput.value,
                 project: projectInput.value,
                 date: dateInput.value,
             };
-
+            storeTasks();
             renderTasks('all');
             taskModal.remove();
         }
-    });
+    }); 
+
+    const inputs = taskForm.querySelectorAll('input');
+
+    inputs.forEach((input) => {
+
+        input.addEventListener("keypress", function (e) {
+
+            if (e.key === "Enter") {
+    
+                e.preventDefault();
+                console.log('submitting')
+                submitButton.click();
+            }
+        });
+
+    })
+
+    
 
     taskModal.showModal();
 }

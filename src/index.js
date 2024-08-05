@@ -6,6 +6,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
 })
 
+
+
 // style project input 
 
 //style modal
@@ -14,9 +16,8 @@ document.addEventListener('DOMContentLoaded', () => {
 //set up all event listeners
 
 //make dedicated project list container
-
+//make project not switch on task adding
 //sorting by dates 
-//setup all even
 //styling
 
 //default option in dropdown
