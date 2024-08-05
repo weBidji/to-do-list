@@ -11,8 +11,6 @@ document.addEventListener('DOMContentLoaded', () => {
 // style project input 
 
 //style modal
-
-//make project not switch on task adding
 //sorting by dates 
 //styling
 

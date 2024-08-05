@@ -79,7 +79,18 @@ export function createTaskModal() {
             const option = document.createElement('option');
             option.textContent = project.textContent;
             option.value = project.textContent;
+            
+
+            const currentProject = document.getElementById('project-title');
+            const currentProjectName = currentProject.textContent;
+
+            if(currentProjectName.toLowerCase() === project.textContent.toLowerCase()) {
+
+                option.selected = true;
+            }
+
             projectInput.appendChild(option);
+
         })
     } else {
 
@@ -87,7 +98,7 @@ export function createTaskModal() {
         option.textContent = 'No project';
         option.value = 'No project';
         projectInput.appendChild(option);
-        console.log(option.textContent);
+
     }
 
     //Date input
@@ -156,7 +167,7 @@ export function createTaskModal() {
             if (e.key === "Enter") {
 
                 e.preventDefault();
-                console.log('submitting')
+
                 submitButton.click();
             }
         });
@@ -178,7 +189,7 @@ export function createTask(name, description, project, date) {
     };
 
     tasks.push(task);
-    console.log('task pushed');
+
     storeTasks();
     renderTasks('all');
 
@@ -339,7 +350,6 @@ export function deleteTask() {
     deleteButtons.forEach((button) => {
         button.addEventListener('click', (e) => {
             {
-                console.log('Deleting task');
 
                 const taskToRemove = e.target.closest('.task');
                 const taskName = taskToRemove.querySelector('.task-name').textContent.toLowerCase();
@@ -354,8 +364,6 @@ export function deleteTask() {
 
                 const projectTitle = document.getElementById('project-title');
                 const projectName = taskToRemove.querySelector('.task-project-name');
-                console.log(projectName.textContent);
-
 
                 if (projectTitle.textContent.toLowerCase() === projectName.textContent.toLowerCase()) {
 
@@ -383,11 +391,9 @@ export function editTaskEventListener() {
         button.addEventListener('click', (e) => {
 
 
-            console.log('Editing task');
 
             const taskToEdit = e.target.closest('.task');
             const taskName = taskToEdit.querySelector('.task-name').textContent;
-            console.log(taskName);
             const taskIndex = tasks.findIndex(task => task.name === taskName.toLowerCase());
 
             if (taskIndex > -1) {
@@ -454,10 +460,10 @@ function openEditTaskModal(task, taskIndex) {
     taskForm.method = 'dialog';
     taskModal.appendChild(taskForm);
 
-    const nameInputDiv = createInput('text', 'name-input', 'Task name:', task.name);
+    const nameInputDiv = createInput('text', 'name-input', 'Task name:', capitalizeFirstLetter(task.name));
     const nameInput = nameInputDiv.querySelector('input');
 
-    const descInputDiv = createInput('text', 'desc-input', 'Task details:', task.description);
+    const descInputDiv = createInput('text', 'desc-input', 'Task details:', capitalizeFirstLetter(task.description));
     const descInput = descInputDiv.querySelector('input');
 
 
@@ -475,14 +481,20 @@ function openEditTaskModal(task, taskIndex) {
     projectInputDiv.appendChild(projectInput);
 
     const projectsArr = Array.from(document.querySelectorAll('.project-item'));
+
     projectsArr.forEach((project) => {
         const option = document.createElement('option');
         option.textContent = project.textContent;
         option.value = project.textContent;
-        if (project.textContent === task.project) {
+
+        if (project.textContent.toLowerCase() === task.project.toString().toLowerCase()) {
             option.selected = true;
         }
         projectInput.appendChild(option);
+
+
+
+
     });
 
 
@@ -512,7 +524,7 @@ function openEditTaskModal(task, taskIndex) {
             e.preventDefault();
             alert('Please fill out the entire form.');
         } else {
-            console.log('task modified');
+
             tasks[taskIndex] = {
                 name: nameInput.value,
                 description: descInput.value,
@@ -534,7 +546,6 @@ function openEditTaskModal(task, taskIndex) {
             if (e.key === "Enter") {
 
                 e.preventDefault();
-                console.log('submitting')
                 submitButton.click();
             }
         });
