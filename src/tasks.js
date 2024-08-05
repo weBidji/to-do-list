@@ -130,7 +130,17 @@ export function createTaskModal() {
             });
 
             storeTasks();
-            renderTasks('all');
+
+            const currentProject = document.getElementById('project-title');
+            const currentProjectName = currentProject.textContent.toLowerCase();
+            const selectedProject = projectInput.value.toLowerCase();
+
+            if (currentProjectName === selectedProject || selectedProject === '') {
+                renderTasks(capitalizeFirstLetter(currentProjectName));
+            } else {
+                renderTasks('all');
+            }
+
             taskModal.remove();
         }
     });
@@ -177,6 +187,7 @@ export function createTask(name, description, project, date) {
 
 
 export function renderTasks(project) {
+
 
     const main = document.getElementById('main-section');
     const mainTitleContainer = document.getElementById('main-title-container');
