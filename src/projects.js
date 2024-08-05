@@ -136,7 +136,7 @@ export function renderProjects() {
         projectContainer.classList.add('project-container');
 
         const projectName = document.createElement('p');
-        projectName.classList.add('current-project');
+        projectName.classList.add('project-item');
         projectName.textContent = capitalizeFirstLetter(project.name);
 
         const deleteProjectButton = document.createElement('button');
@@ -157,9 +157,9 @@ export function renderProjects() {
 }
 
 export function filterProjects() {
-    const currentProjects = document.querySelectorAll('.current-project');
+    const projectItems = document.querySelectorAll('.project-item');
 
-    currentProjects.forEach((project) => {
+    projectItems.forEach((project) => {
         const projectName = project.textContent.trim();
 
         project.addEventListener('click', () => renderTasks(projectName));
@@ -176,7 +176,7 @@ export function deleteProjectEventListener() {
             const projectContainer = e.target.closest('.project-container');
             if (projectContainer) {
 
-                const projectName = projectContainer.querySelector('.current-project').textContent;
+                const projectName = projectContainer.querySelector('.project-item').textContent;
 
                 const updatedTasks = tasks.filter(task => capitalizeFirstLetter(task.project) !== projectName);
                 tasks.length = 0;

@@ -12,10 +12,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
 //style modal
 
-//fix deleted tasks reappearing after refresh
-//set up all event listeners
-
-//make dedicated project list container
 //make project not switch on task adding
 //sorting by dates 
 //styling

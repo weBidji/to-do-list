@@ -72,13 +72,23 @@ export function createTaskModal() {
     projectInputDiv.classList.add('form-input');
     projectInputDiv.appendChild(projectInput);
 
-    const projectsArr = Array.from(document.querySelectorAll('.current-project'));
-    projectsArr.forEach((project) => {
+    const projectsArr = Array.from(document.querySelectorAll('.project-item'));
+
+    if (projectsArr.length > 0) {
+        projectsArr.forEach((project) => {
+            const option = document.createElement('option');
+            option.textContent = project.textContent;
+            option.value = project.textContent;
+            projectInput.appendChild(option);
+        })
+    } else {
+
         const option = document.createElement('option');
-        option.textContent = project.textContent;
-        option.value = project.textContent;
+        option.textContent = 'No project';
+        option.value = 'No project';
         projectInput.appendChild(option);
-    });
+        console.log(option.textContent);
+    }
 
     //Date input
 
@@ -134,7 +144,7 @@ export function createTaskModal() {
         input.addEventListener("keypress", function (e) {
 
             if (e.key === "Enter") {
-    
+
                 e.preventDefault();
                 console.log('submitting')
                 submitButton.click();
@@ -151,7 +161,7 @@ export function createTaskModal() {
 export function createTask(name, description, project, date) {
 
     const task = {
-        name: name,
+        name: name.toLowerCase(),
         description: description,
         project: project,
         date: date,
@@ -250,7 +260,21 @@ export function renderTasks(project) {
             taskProjectText = task.project;
         }
         taskProject.innerHTML = '<span><svg class="project-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20,6C20.58,6 21.05,6.2 21.42,6.59C21.8,7 22,7.45 22,8V19C22,19.55 21.8,20 21.42,20.41C21.05,20.8 20.58,21 20,21H4C3.42,21 2.95,20.8 2.58,20.41C2.2,20 2,19.55 2,19V8C2,7.45 2.2,7 2.58,6.59C2.95,6.2 3.42,6 4,6H8V4C8,3.42 8.2,2.95 8.58,2.58C8.95,2.2 9.42,2 10,2H14C14.58,2 15.05,2.2 15.42,2.58C15.8,2.95 16,3.42 16,4V6H20M4,8V19H20V8H4M14,6V4H10V6H14Z" /></svg></span>' + `<p class="task-project-name">${capitalizeFirstLetter(taskProjectText)}</p>`;
-        taskDate.innerHTML = '<span><svg  class= "calendar-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 3H18V1H16V3H8V1H6V3H5C3.89 3 3 3.9 3 5V19C3 20.11 3.9 21 5 21H19C20.11 21 21 20.11 21 19V5C21 3.9 20.11 3 19 3M19 19H5V9H19V19M19 7H5V5H19V7Z" /></svg></span>' + `<p>${task.date}</p>`;
+
+
+        // Date formatting function
+
+        function formatDate(date) {
+
+            const dateString = date;
+            const [day, month, year] = dateString.split('-');
+
+
+            const formattedDate = `${year}/${month}/${day}`;
+            return formattedDate;
+
+        }
+        taskDate.innerHTML = '<span><svg  class= "calendar-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 3H18V1H16V3H8V1H6V3H5C3.89 3 3 3.9 3 5V19C3 20.11 3.9 21 5 21H19C20.11 21 21 20.11 21 19V5C21 3.9 20.11 3 19 3M19 19H5V9H19V19M19 7H5V5H19V7Z" /></svg></span>' + `<p>${formatDate(task.date)}</p>`;
         editButton.innerHTML = '<svg class="edit-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18.13 12L19.39 10.74C19.83 10.3 20.39 10.06 21 10V9L15 3H5C3.89 3 3 3.89 3 5V19C3 20.1 3.89 21 5 21H11V19.13L11.13 19H5V5H12V12H18.13M14 4.5L19.5 10H14V4.5M19.13 13.83L21.17 15.87L15.04 22H13V19.96L19.13 13.83M22.85 14.19L21.87 15.17L19.83 13.13L20.81 12.15C21 11.95 21.33 11.95 21.53 12.15L22.85 13.47C23.05 13.67 23.05 14 22.85 14.19Z" /></svg>'
 
         deleteButton.innerHTML = '<svg class = "delete-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M6,19A2,2 0 0,0 8,21H16A2,2 0 0,0 18,19V7H6V19M8,9H16V19H8V9M15.5,4L14.5,3H9.5L8.5,4H5V6H19V4H15.5Z" /></svg>'
@@ -352,7 +376,8 @@ export function editTaskEventListener() {
 
             const taskToEdit = e.target.closest('.task');
             const taskName = taskToEdit.querySelector('.task-name').textContent;
-            const taskIndex = tasks.findIndex(task => task.name === taskName);
+            console.log(taskName);
+            const taskIndex = tasks.findIndex(task => task.name === taskName.toLowerCase());
 
             if (taskIndex > -1) {
                 const task = tasks[taskIndex];
@@ -362,6 +387,7 @@ export function editTaskEventListener() {
             } else {
                 console.log('Task not found in the array');
             }
+
 
         });
     })
@@ -411,18 +437,6 @@ function openEditTaskModal(task, taskIndex) {
         return container;
     }
 
-    // Date formatting function
-
-    function formatDate(date) {
-
-        const dateString = date;
-        const [day, month, year] = dateString.split('/');
-
-
-        const formattedDate = `${year}-${month}-${day}`;
-        return formattedDate;
-
-    }
 
 
     const taskForm = document.createElement('form');
@@ -449,7 +463,7 @@ function openEditTaskModal(task, taskIndex) {
     projectInputDiv.classList.add('form-input');
     projectInputDiv.appendChild(projectInput);
 
-    const projectsArr = Array.from(document.querySelectorAll('.current-project'));
+    const projectsArr = Array.from(document.querySelectorAll('.project-item'));
     projectsArr.forEach((project) => {
         const option = document.createElement('option');
         option.textContent = project.textContent;
@@ -460,8 +474,8 @@ function openEditTaskModal(task, taskIndex) {
         projectInput.appendChild(option);
     });
 
-    const formattedDate = formatDate(task.date);
-    const dateInputDiv = createInput('date', 'date-input', 'Due date:', formattedDate);
+
+    const dateInputDiv = createInput('date', 'date-input', 'Due date:', task.date);
     const dateInput = dateInputDiv.querySelector('input');
 
     const submitButton = document.createElement('button');
@@ -498,7 +512,7 @@ function openEditTaskModal(task, taskIndex) {
             renderTasks('all');
             taskModal.remove();
         }
-    }); 
+    });
 
     const inputs = taskForm.querySelectorAll('input');
 
@@ -507,7 +521,7 @@ function openEditTaskModal(task, taskIndex) {
         input.addEventListener("keypress", function (e) {
 
             if (e.key === "Enter") {
-    
+
                 e.preventDefault();
                 console.log('submitting')
                 submitButton.click();
@@ -516,7 +530,7 @@ function openEditTaskModal(task, taskIndex) {
 
     })
 
-    
+
 
     taskModal.showModal();
 }
