@@ -1,4 +1,4 @@
-import { createTask, renderTasks, openModal, markAsComplete, deleteTask, editTaskEventListener, createTaskModal, todayEventListener, thisWeekEventListener, allTasksEventListener } from './tasks.js';
+import { createTask, renderTasks, openModal, deleteTask, editTaskEventListener, createTaskModal, todayEventListener, thisWeekEventListener, allTasksEventListener, markAsCompleteEventListener } from './tasks.js';
 import { createProject, projectList, renderProjects, filterProjects, deleteProjectEventListener, showProjectInput } from './projects.js';
 
 export function initializeApp() {
@@ -6,26 +6,16 @@ export function initializeApp() {
     loadUI();
     projectList();
     openModal();
-    /*
-        createProject('Studies');
-        createProject('Work');
-        createTask('laundry', 'wash clothes', 'Studies', '25/07/2024');
-        createTask('dishes', 'wash cutlery and plates', 'Work', '29/07/2024');
-        createTask('butter', 'toast', 'Studies', '01/02/2023');
-        createTask('fix car', 'windshield', 'Work', '29/07/2024');
-    
-    */
+   
     renderTasks('all');
     renderProjects();
     filterProjects();
-    markAsComplete();
+    markAsCompleteEventListener();
     deleteTask();
     todayEventListener();
     thisWeekEventListener();
     allTasksEventListener();
-    // showProjectInput();
-    // createTaskModal();
-    //createTaskModal();
+
 }
 
 export function loadUI() {
