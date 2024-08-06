@@ -1,4 +1,4 @@
-import { createTask, renderTasks, openModal, markAsComplete, deleteTask, editTaskEventListener, createTaskModal } from './tasks.js';
+import { createTask, renderTasks, openModal, markAsComplete, deleteTask, editTaskEventListener, createTaskModal, todayEventListener, thisWeekEventListener } from './tasks.js';
 import { createProject, projectList, renderProjects, filterProjects, deleteProjectEventListener, showProjectInput } from './projects.js';
 
 export function initializeApp() {
@@ -20,6 +20,8 @@ export function initializeApp() {
     filterProjects();
     markAsComplete();
     deleteTask();
+    todayEventListener();
+    thisWeekEventListener();
     // showProjectInput();
     // createTaskModal();
     //createTaskModal();
