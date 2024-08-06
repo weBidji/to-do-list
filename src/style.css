@@ -455,12 +455,16 @@ form {
 
 .edit-button,
 .delete-button {
-
+    visibility:hidden;
     margin-left: auto;
     width: fit-content;
     padding: 0.2rem;
     background-color: white;
     transition: transform 0.1s ease-in-out;
+}
+
+.task:hover button {
+    visibility: visible;
 }
 
 /*
