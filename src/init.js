@@ -1,4 +1,4 @@
-import { createTask, renderTasks, openModal, markAsComplete, deleteTask, editTaskEventListener, createTaskModal, todayEventListener, thisWeekEventListener } from './tasks.js';
+import { createTask, renderTasks, openModal, markAsComplete, deleteTask, editTaskEventListener, createTaskModal, todayEventListener, thisWeekEventListener, allTasksEventListener } from './tasks.js';
 import { createProject, projectList, renderProjects, filterProjects, deleteProjectEventListener, showProjectInput } from './projects.js';
 
 export function initializeApp() {
@@ -22,6 +22,7 @@ export function initializeApp() {
     deleteTask();
     todayEventListener();
     thisWeekEventListener();
+    allTasksEventListener();
     // showProjectInput();
     // createTaskModal();
     //createTaskModal();
@@ -44,6 +45,12 @@ export function loadUI() {
     document.body.appendChild(navBar);
     navBar.id = 'nav';
 
+
+    const allTasks = document.createElement('a');
+    allTasks.id = "all-tasks-link";
+    allTasks.textContent = 'All tasks';
+    allTasks.classList.add('nav-link');
+    navBar.appendChild(allTasks);
 
     const todayLink = document.createElement('a');
     todayLink.id = 'today-link';

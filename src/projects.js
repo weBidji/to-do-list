@@ -32,7 +32,7 @@ export function projectList() {
     projectsBox.id = 'projects-box';
     nav.appendChild(projectsBox);
 
-    addProjectButton.addEventListener('click', (e) => {
+   projectsLinkContainer.addEventListener('click', (e) => {
 
         const projectForm = document.getElementById('project-form');
 
