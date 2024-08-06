@@ -7,12 +7,12 @@ document.addEventListener('DOMContentLoaded', () => {
 })
 
 
-
-// style project input 
-
+//fix sort by today
+//make edit/delete visible on hover?
 //style modalS !important
 //sorting by dates 
 //styling
+//sort by completed?
 
 
 

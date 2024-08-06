@@ -366,15 +366,33 @@ export function renderTasks(project, filter) {
     // Date filtering function
     function isDateInRange(dateStr, filter) {
         const today = new Date();
+        
         const taskDate = new Date(dateStr);
-
+        const taskYear = taskDate.getUTCFullYear();
+        const taskMonth = taskDate.getUTCMonth();
+        const taskDay = taskDate.getUTCDate();
+    
+        const todayYear = today.getFullYear();
+        const todayMonth = today.getMonth();
+        const todayDay = today.getDate();
+    
         switch (filter) {
             case 'today':
-                return taskDate.toDateString() === today.toDateString();
+
+                return taskYear === todayYear && taskMonth === todayMonth && taskDay === todayDay;
             case 'thisWeek':
-                const startOfWeek = new Date(today.setDate(today.getDate() - today.getDay()));
-                const endOfWeek = new Date(today.setDate(today.getDate() - today.getDay() + 6));
-                return taskDate >= startOfWeek && taskDate <= endOfWeek;
+                const startOfWeek = new Date(today);
+                startOfWeek.setDate(today.getDate() - today.getDay());
+                startOfWeek.setHours(0, 0, 0, 0);
+    
+                const endOfWeek = new Date(startOfWeek);
+                endOfWeek.setDate(startOfWeek.getDate() + 6);
+                endOfWeek.setHours(23, 59, 59, 999);
+    
+
+                const taskDateForComparison = new Date(taskYear, taskMonth, taskDay);
+    
+                return taskDateForComparison >= startOfWeek && taskDateForComparison <= endOfWeek;
             case 'all':
             default:
                 return true;
