@@ -10,11 +10,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
 // style project input 
 
-//style modal
+//style modalS !important
 //sorting by dates 
 //styling
 
-//default option in dropdown
 
 
 

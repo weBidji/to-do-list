@@ -6,23 +6,23 @@ export function initializeApp() {
     loadUI();
     projectList();
     openModal();
-/*
-    createProject('Studies');
-    createProject('Work');
-    createTask('laundry', 'wash clothes', 'Studies', '25/07/2024');
-    createTask('dishes', 'wash cutlery and plates', 'Work', '29/07/2024');
-    createTask('butter', 'toast', 'Studies', '01/02/2023');
-    createTask('fix car', 'windshield', 'Work', '29/07/2024');
-
-*/
+    /*
+        createProject('Studies');
+        createProject('Work');
+        createTask('laundry', 'wash clothes', 'Studies', '25/07/2024');
+        createTask('dishes', 'wash cutlery and plates', 'Work', '29/07/2024');
+        createTask('butter', 'toast', 'Studies', '01/02/2023');
+        createTask('fix car', 'windshield', 'Work', '29/07/2024');
+    
+    */
     renderTasks('all');
     renderProjects();
     filterProjects();
-    editTaskEventListener();
     markAsComplete();
     deleteTask();
     // showProjectInput();
     // createTaskModal();
+    //createTaskModal();
 }
 
 export function loadUI() {
@@ -43,7 +43,17 @@ export function loadUI() {
     navBar.id = 'nav';
 
 
+    const todayLink = document.createElement('a');
+    todayLink.id = 'today-link';
+    todayLink.textContent = 'Today';
+    todayLink.classList.add('nav-link');
+    navBar.appendChild(todayLink);
 
+    const thisWeekLink = document.createElement('a');
+    thisWeekLink.id = 'this-week-link';
+    thisWeekLink.textContent = 'This week';
+    thisWeekLink.classList.add('nav-link');
+    navBar.appendChild(thisWeekLink);
 
 
 

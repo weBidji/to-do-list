@@ -1,5 +1,3 @@
-import { renderProjects } from "./projects";
-
 export let tasks = [];
 
 export function createTaskModal() {
@@ -47,16 +45,26 @@ export function createTaskModal() {
     }
 
     // Create  form
+
     const taskForm = document.createElement('form');
     taskForm.method = 'dialog';
     taskModal.appendChild(taskForm);
 
     // Input elements
+
     const nameInputDiv = createInput('text', 'name-input', 'Task name:');
     const nameInput = nameInputDiv.querySelector('input');
+    nameInput.minLength = 1;
+    nameInput.maxLength = 20;
+    nameInput.required = true;
+    nameInput.placeholder = ''
+
 
     const descInputDiv = createInput('text', 'desc-input', 'Task details:');
     const descInput = descInputDiv.querySelector('input');
+    descInput.minLength = 1;
+    descInput.maxLength = 20;
+    descInput.placeholder = '';
 
     // Project selection
 
@@ -79,12 +87,12 @@ export function createTaskModal() {
             const option = document.createElement('option');
             option.textContent = project.textContent;
             option.value = project.textContent;
-            
+
 
             const currentProject = document.getElementById('project-title');
             const currentProjectName = currentProject.textContent;
 
-            if(currentProjectName.toLowerCase() === project.textContent.toLowerCase()) {
+            if (currentProjectName.toLowerCase() === project.textContent.toLowerCase()) {
 
                 option.selected = true;
             }
@@ -101,10 +109,16 @@ export function createTaskModal() {
 
     }
 
-    //Date input
+    // Date input
 
     const dateInputDiv = createInput('date', 'date-input', 'Due date:');
     const dateInput = dateInputDiv.querySelector('input');
+    dateInput.required = true;
+
+    const today = new Date().toISOString().split('T')[0];
+    dateInput.value = today;
+
+
 
     const submitButton = document.createElement('button');
     submitButton.type = 'button';
@@ -128,14 +142,16 @@ export function createTaskModal() {
 
     // Submit button event listener
     submitButton.addEventListener('click', (e) => {
-        if (nameInput.value === '' || descInput.value === '' || dateInput.value === '') {
+        if (nameInput.value.trim() === '' || dateInput.value === '') {
             e.preventDefault();
-            alert('Please fill out the entire form.');
+            alert('Please enter a name for your task. :)')
+
+
         } else {
 
             tasks.push({
-                name: nameInput.value,
-                description: descInput.value,
+                name: nameInput.value.trim(),
+                description: descInput.value.trim(),
                 project: projectInput.value,
                 date: dateInput.value,
             });
@@ -156,7 +172,7 @@ export function createTaskModal() {
         }
     });
 
-    //enter key use 
+    // enter key use 
 
     const inputs = taskForm.querySelectorAll('input');
 
@@ -353,7 +369,7 @@ export function deleteTask() {
 
                 const taskToRemove = e.target.closest('.task');
                 const taskName = taskToRemove.querySelector('.task-name').textContent.toLowerCase();
-                const taskIndex = tasks.findIndex(task => task.name === taskName);
+                const taskIndex = tasks.findIndex(task => task.name.toLowerCase() === taskName);
 
                 if (taskIndex > -1) {
                     tasks.splice(taskIndex, 1);
@@ -394,13 +410,15 @@ export function editTaskEventListener() {
 
             const taskToEdit = e.target.closest('.task');
             const taskName = taskToEdit.querySelector('.task-name').textContent;
-            const taskIndex = tasks.findIndex(task => task.name === taskName.toLowerCase());
+            const taskIndex = tasks.findIndex(task => task.name.toLowerCase() === taskName.toLowerCase());
 
             if (taskIndex > -1) {
                 const task = tasks[taskIndex];
 
 
                 openEditTaskModal(task, taskIndex);
+                console.log('here here')
+
             } else {
                 console.log('Task not found in the array');
             }
@@ -450,6 +468,7 @@ function openEditTaskModal(task, taskIndex) {
         container.classList.add('form-input');
         container.appendChild(label);
         container.appendChild(createdInput);
+
 
         return container;
     }
@@ -553,7 +572,7 @@ function openEditTaskModal(task, taskIndex) {
     })
 
 
-
+    console.log('sup')
     taskModal.showModal();
 }
 

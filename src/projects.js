@@ -5,7 +5,8 @@ let projectsArr = [];
 export function projectList() {
     const nav = document.getElementById('nav');
     const projects = document.createElement('div');
-    projects.id = 'projects'
+    projects.id = 'projects';
+    projects.classList.add('nav-link')
 
     nav.appendChild(projects);
 
@@ -83,7 +84,7 @@ export function showProjectInput() {
 
         } else {
 
-            createProject(projectNameInput.value);
+            createProject(projectNameInput.value.trim());
             storeProjects();
             renderProjects();
 
@@ -135,7 +136,7 @@ export function renderProjects() {
         const projectContainer = document.createElement('div');
         projectContainer.classList.add('project-container');
 
-        const projectName = document.createElement('p');
+        const projectName = document.createElement('a');
         projectName.classList.add('project-item');
         projectName.textContent = capitalizeFirstLetter(project.name);
 
