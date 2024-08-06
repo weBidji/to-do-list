@@ -10,10 +10,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 //style modalS !important
-
-
 //styling
-//sort by completed?
+// completion logic and rendering
+//no tasks text for empty projects
 
 
 

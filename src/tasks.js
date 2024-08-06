@@ -154,6 +154,7 @@ export function createTaskModal() {
                 description: descInput.value.trim(),
                 project: projectInput.value,
                 date: dateInput.value,
+                completed: false,
             });
 
             storeTasks();
@@ -195,13 +196,14 @@ export function createTaskModal() {
 
 }
 
-export function createTask(name, description, project, date) {
+export function createTask(name, description, project, date, completed) {
 
     const task = {
         name: name.toLowerCase(),
         description: description,
         project: project,
         date: date,
+        completed: Boolean,
     };
 
     tasks.push(task);
@@ -355,7 +357,25 @@ export function markAsComplete() {
         if (e.target.classList.contains('completed-button')) {
             const completedTask = e.target.closest('.task');
             completedTask.classList.toggle('completed');
-            e.target.classList.toggle('checked')
+            e.target.classList.toggle('checked');
+            const taskName = completedTask.querySelector('.task-name').textContent.toLowerCase();
+
+          
+            console.log(taskName);
+            tasks.forEach((task) => {
+
+
+               
+                const taskIndex = tasks.findIndex(task => task.name.toLowerCase() === taskName);
+
+                if (taskIndex > -1) {
+
+                    task.completed = !task.completed;
+
+                }
+
+            })
+            storeTasks();
         }
     });
 

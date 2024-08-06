@@ -19,7 +19,7 @@ export function projectList() {
     projectsLink.textContent = 'Projects';
 
 
-    projectsLink.addEventListener('click', () => renderTasks('all'));
+    //projectsLink.addEventListener('click', () => renderTasks('all'));
 
     const addProjectButton = document.createElement('button');
     addProjectButton.id = 'add-project-button';
@@ -32,14 +32,13 @@ export function projectList() {
     projectsBox.id = 'projects-box';
     nav.appendChild(projectsBox);
 
-   projectsLinkContainer.addEventListener('click', (e) => {
+    projectsLinkContainer.addEventListener('click', (e) => {
 
         const projectForm = document.getElementById('project-form');
 
         if (projectForm) {
             e.preventDefault();
         } else {
-
 
             showProjectInput();
         }
