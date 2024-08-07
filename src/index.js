@@ -8,7 +8,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 
-//fix rendering all and by projects not working
+//fix return to all tasks on edit/delete
+
 //style modalS !important
 //styling
 //click signal on nav links

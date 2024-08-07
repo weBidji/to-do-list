@@ -409,15 +409,19 @@ export function deleteTask() {
                 const currentFilter = projectTitle.textContent.toLowerCase();
                 console.log(currentFilter);
 
-                if (projectTitle.textContent.toLowerCase() === projectName.textContent.toLowerCase()) {
+                if (currentFilter === projectName.textContent.toLowerCase()) {
 
                     renderTasks(projectTitle.textContent);
 
+                } else if (currentFilter === 'this week') {
+
+                    renderTasks('all', 'thisWeek');
+    
                 } else {
-                 
-                    
+    
                     renderTasks('all', currentFilter);
                 }
+    
 
 
             }
@@ -581,7 +585,26 @@ function openEditTaskModal(task, taskIndex) {
                 date: dateInput.value,
             };
             storeTasks();
-            renderTasks('all');
+
+
+            const projectTitle = document.getElementById('project-title');
+            const projectName = projectInput.value.toString().toLowerCase();
+            const currentFilter = projectTitle.textContent.toLowerCase();
+            console.log(currentFilter);
+
+            if (currentFilter === projectName) {
+
+                renderTasks(projectName);
+
+            } else if (currentFilter === 'this week') {
+
+                renderTasks('all', 'thisWeek');
+
+            } else {
+
+                renderTasks('all', currentFilter);
+            }
+
             taskModal.remove();
         }
     });
