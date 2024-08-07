@@ -406,13 +406,17 @@ export function deleteTask() {
 
                 const projectTitle = document.getElementById('project-title');
                 const projectName = taskToRemove.querySelector('.task-project-name');
+                const currentFilter = projectTitle.textContent.toLowerCase();
+                console.log(currentFilter);
 
                 if (projectTitle.textContent.toLowerCase() === projectName.textContent.toLowerCase()) {
 
                     renderTasks(projectTitle.textContent);
 
                 } else {
-                    renderTasks('all');
+                 
+                    
+                    renderTasks('all', currentFilter);
                 }
 
 
