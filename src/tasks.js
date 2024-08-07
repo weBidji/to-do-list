@@ -209,7 +209,24 @@ export function createTask(name, description, project, date, completed) {
     tasks.push(task);
 
     storeTasks();
-    renderTasks('all');
+
+    const projectTitle = document.getElementById('project-title');
+    const currentFilter = projectTitle.textContent.toLowerCase();
+    const projectName = project.toLowerCase();
+    console.log(currentFilter);
+    console.log(projectName);
+    if (currentFilter === projectName) {
+
+        renderTasks(currentFilter);
+
+    } else if (currentFilter === 'this week') {
+
+        renderTasks('all', 'thisWeek');
+
+    } else {
+
+        renderTasks('all', currentFilter);
+    }
 
 }
 
@@ -416,12 +433,12 @@ export function deleteTask() {
                 } else if (currentFilter === 'this week') {
 
                     renderTasks('all', 'thisWeek');
-    
+
                 } else {
-    
+
                     renderTasks('all', currentFilter);
                 }
-    
+
 
 
             }
@@ -594,7 +611,7 @@ function openEditTaskModal(task, taskIndex) {
 
             if (currentFilter === projectName) {
 
-                renderTasks(projectName);
+                renderTasks(capitalizeFirstLetter(projectName));
 
             } else if (currentFilter === 'this week') {
 
