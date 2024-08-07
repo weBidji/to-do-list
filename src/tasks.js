@@ -214,8 +214,7 @@ export function createTask(name, description, project, date, completed) {
     const projectTitle = document.getElementById('project-title');
     const currentFilter = projectTitle.textContent.toLowerCase();
     const projectName = project.toLowerCase();
-    console.log(currentFilter);
-    console.log(projectName);
+
     if (currentFilter === projectName) {
 
         renderTasks(currentFilter);
@@ -234,6 +233,7 @@ export function createTask(name, description, project, date, completed) {
 
 
 export function renderTasks(project, filter) {
+
     const main = document.getElementById('main-section');
     const mainTitleContainer = document.getElementById('main-title-container');
 
@@ -314,7 +314,8 @@ export function renderTasks(project, filter) {
     }
 
     // Create, fill and append elements to section
-    tasksToDisplay.forEach(task => {
+
+        tasksToDisplay.forEach(task => {
         const taskDiv = document.createElement('div');
         const taskName = document.createElement('h3');
         const taskDesc = document.createElement('div');
@@ -444,7 +445,6 @@ export function deleteTask() {
                 const projectTitle = document.getElementById('project-title');
                 const projectName = taskToRemove.querySelector('.task-project-name');
                 const currentFilter = projectTitle.textContent.toLowerCase();
-                console.log(currentFilter);
 
                 if (currentFilter === projectName.textContent.toLowerCase()) {
 
@@ -488,7 +488,6 @@ export function editTaskEventListener() {
 
 
                 openEditTaskModal(task, taskIndex);
-                console.log('here here')
 
             } else {
                 console.log('Task not found in the array');
@@ -627,7 +626,6 @@ function openEditTaskModal(task, taskIndex) {
             const projectTitle = document.getElementById('project-title');
             const projectName = projectInput.value.toString().toLowerCase();
             const currentFilter = projectTitle.textContent.toLowerCase();
-            console.log(currentFilter);
 
             if (currentFilter === projectName) {
 
@@ -642,7 +640,7 @@ function openEditTaskModal(task, taskIndex) {
                 renderTasks('all', currentFilter);
             }
 
-            taskModal.remove();
+            closeModal();
         }
     });
 
@@ -662,7 +660,6 @@ function openEditTaskModal(task, taskIndex) {
     })
 
 
-    console.log('sup')
     taskModal.showModal();
 }
 
@@ -683,7 +680,6 @@ function todayEventListener() {
 
     const todayLink = document.getElementById('today-link');
     todayLink.addEventListener('click', () => {
-        console.log('clicked');
         renderTasks('all', 'today');
     })
 }
@@ -692,7 +688,6 @@ function thisWeekEventListener() {
 
     const thisWeekLink = document.getElementById('this-week-link');
     thisWeekLink.addEventListener('click', () => {
-        console.log('cluck');
         renderTasks('all', 'thisWeek');
     })
 }
@@ -700,7 +695,6 @@ function thisWeekEventListener() {
 function allTasksEventListener() {
     const allTasks = document.getElementById('all-tasks-link');
     allTasks.addEventListener('click', () => {
-        console.log('yerp');
         renderTasks('all');
     })
 }

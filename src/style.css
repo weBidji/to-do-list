@@ -24,8 +24,6 @@
 svg {
     height: 20px;
     width: 25px;
-    /* fill: rgb(167, 5, 5); */
-    /* fill: rgb(54, 54, 54); */
     fill: black;
 
 }
@@ -35,16 +33,17 @@ button {
 }
 
 body {
+
     display: grid;
     grid-template-columns: repeat(6, 1fr);
     grid-template-rows: 1fr 7fr;
     min-height: 100vh;
-
     font-family: 'lato', Arial, Helvetica, sans-serif;
 }
 
 header {
-    max-height:54px;
+
+    max-height: 54px;
     grid-row: 1 / 2;
     grid-column: 1 / -1;
     display: flex;
@@ -67,7 +66,6 @@ nav {
     grid-row: 2/-1;
     color: black;
     padding-left: 2rem;
-    /* padding-top: 1rem; */
     min-height: 100%;
     display: flex;
     flex-direction: column;
@@ -81,13 +79,14 @@ nav {
 
 }
 
+/* NAV AND PROJECTS LIST */
 
 .nav-link {
-
 
     font-weight: bold;
     font-size: 1.5rem;
     padding-left: 0.5rem;
+
 }
 
 .nav-link:hover {
@@ -209,8 +208,8 @@ nav {
 
 .project-item:hover,
 #projects-link:hover {
+
     cursor: pointer;
-    /* transform: scale(1.1); */
     transition: transform 0.1s ease-in-out;
     text-underline-offset: 0.375rem;
 
@@ -324,6 +323,7 @@ button:hover {
 }
 
 #add-btn:hover {
+
     transition: transform 0.1s linear;
     box-shadow: 0px 0px 6px rgb(70, 69, 69);
     transition: box-shadow 0.025s ease-in-out;
@@ -331,20 +331,19 @@ button:hover {
     text-underline-offset: 0.375rem;
 }
 
-#task-modal::backdrop {
-    background: rgba(0, 0, 0, 0.5);
-    backdrop-filter: blur(1px);
-}
+
 
 
 
 #close-button {
+
     font-size: 1.3rem;
     border: none;
     background-color: none;
 }
 
 form {
+
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
@@ -356,6 +355,7 @@ form {
 
 
 .task {
+
     padding: 0.75rem 0.5rem;
     border-radius: 12px;
     border: 1px solid rgb(179, 177, 177);
@@ -381,12 +381,14 @@ form {
 }
 
 .task:hover {
+
     transition: transform 0.1s linear;
     box-shadow: 0px 0px 2px rgb(70, 69, 69);
     transition: box-shadow 0.025s ease-in-out;
 }
 
 .task-desc {
+
     font-family: 'lato', Arial, Helvetica, sans-serif;
     font-weight: 300;
     color: rgb(54, 54, 54);
@@ -402,11 +404,12 @@ form {
 }
 
 .project-icon {
+
     fill: rgb(54, 54, 54);
 }
 
 .calendar-icon {
-    /* fill: rgb(179, 177, 177); */
+
     fill: rgb(54, 54, 54);
 }
 
@@ -501,14 +504,17 @@ form {
     animation: slide-in 0.25s ease-in-out;
 }
 
+#task-modal::backdrop {
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(1px);
+}
+
 #task-modal.slide-out {
     animation: slide-out 0.25s ease-in-out;
 }
 
 dialog {
 
-    border-radius: 4px;
-    /* border: 1px solid rgb(179, 177, 177); */
     border: none;
     padding-bottom: 1rem;
     font-size: 1.25rem;
@@ -535,15 +541,13 @@ dialog form {
 
     padding: 1rem;
     font-size: 1rem;
-    /* background-color: var(--lime-800); */
     width: 100%;
     position: relative;
-    /* color: white; */
 
 }
 
 #top-bar h2 {
-    /* padding-left: 0.5rem; */
+
     display: inline;
     border-bottom: 2px solid var(--lime-600);
     padding-right: 2.25rem;

@@ -8,10 +8,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 
-//style modalS !important
-//styling
-//click signal on nav links
-
 
 
 
