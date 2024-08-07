@@ -266,6 +266,8 @@ export function renderTasks(project, filter) {
     }
     mainTitleContainer.appendChild(projectTitle);
 
+
+
     // Date filtering function
     function isDateInRange(dateStr, filter) {
         const today = new Date();
@@ -361,6 +363,23 @@ export function renderTasks(project, filter) {
         taskDiv.appendChild(editButton);
         taskDiv.appendChild(deleteButton);
     });
+
+    // message if empty 
+
+    if (tasksToDisplay.length === 0) {
+
+        emptySection('Looks like this is empty. Start adding tasks now :)')
+        
+    }
+
+
+    function emptySection(message) {
+
+        const emptyMessage = document.createElement('div');
+        emptyMessage.textContent = message;
+        emptyMessage.classList.add('task');
+        main.appendChild(emptyMessage);
+    }
 
     // Attach event listeners
     editTaskEventListener();
