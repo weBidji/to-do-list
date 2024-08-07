@@ -1,20 +1,17 @@
-import { createTask, renderTasks, openModal, deleteTask, editTaskEventListener, createTaskModal, todayEventListener, thisWeekEventListener, allTasksEventListener, markAsCompleteEventListener } from './tasks.js';
-import { createProject, projectList, renderProjects, filterProjects, deleteProjectEventListener, showProjectInput } from './projects.js';
+import { renderTasks, openModal, deleteTask,  setUpEventListeners, markAsCompleteEventListener } from './tasks.js';
+import { projectList, renderProjects, filterProjects } from './projects.js';
 
 export function initializeApp() {
 
     loadUI();
     projectList();
     openModal();
-   
     renderTasks('all');
     renderProjects();
     filterProjects();
     markAsCompleteEventListener();
     deleteTask();
-    todayEventListener();
-    thisWeekEventListener();
-    allTasksEventListener();
+    setUpEventListeners();
 
 }
 

@@ -8,11 +8,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 
-
+//fix rendering all and by projects not working
 //style modalS !important
 //styling
-// completion logic and rendering
-//no tasks text for empty projects
+//click signal on nav links
 
 
 

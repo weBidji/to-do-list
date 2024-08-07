@@ -162,7 +162,7 @@ export function filterProjects() {
     projectItems.forEach((project) => {
         const projectName = project.textContent.trim();
 
-        project.addEventListener('click', () => renderTasks(projectName));
+        project.addEventListener('click', () => renderTasks(projectName, 'all'));
     });
 }
 

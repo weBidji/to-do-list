@@ -455,7 +455,7 @@ form {
 
 .edit-button,
 .delete-button {
-    visibility:hidden;
+    visibility: hidden;
     margin-left: auto;
     width: fit-content;
     padding: 0.2rem;
@@ -467,11 +467,6 @@ form {
     visibility: visible;
 }
 
-/*
-.edit-icon {
-    fill: rgb(54, 54, 54)
-}
-*/
 .delete-button {
 
     margin-right: auto;

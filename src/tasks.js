@@ -237,7 +237,7 @@ export function renderTasks(project, filter) {
     const projectTitle = document.createElement('h2');
     projectTitle.id = 'project-title';
     if (project === 'all') {
-        projectTitle.textContent = 'All projects';
+        projectTitle.textContent = 'All tasks';
     } else {
         projectTitle.textContent = project;
     }
@@ -559,9 +559,9 @@ function openEditTaskModal(task, taskIndex) {
 
 
     submitButton.addEventListener('click', (e) => {
-        if (nameInput.value === '' || descInput.value === '' || dateInput.value === '') {
+        if (nameInput.value === '') {
             e.preventDefault();
-            alert('Please fill out the entire form.');
+            alert('Please enter a name for your task.');
         } else {
 
             tasks[taskIndex] = {
@@ -609,7 +609,7 @@ export function capitalizeFirstLetter(string) {
     return string.charAt(0).toUpperCase() + string.slice(1);
 }
 
-export function todayEventListener() {
+function todayEventListener() {
 
     const todayLink = document.getElementById('today-link');
     todayLink.addEventListener('click', () => {
@@ -618,7 +618,7 @@ export function todayEventListener() {
     })
 }
 
-export function thisWeekEventListener() {
+ function thisWeekEventListener() {
 
     const thisWeekLink = document.getElementById('this-week-link');
     thisWeekLink.addEventListener('click', () => {
@@ -627,7 +627,7 @@ export function thisWeekEventListener() {
     })
 }
 
-export function allTasksEventListener() {
+ function allTasksEventListener() {
     const allTasks = document.getElementById('all-tasks-link');
     allTasks.addEventListener('click', () => {
         console.log('yerp');
@@ -635,4 +635,11 @@ export function allTasksEventListener() {
     })
 }
 
+
+export function setUpEventListeners() {
+
+    todayEventListener();
+    thisWeekEventListener();
+    allTasksEventListener();
+}
 
