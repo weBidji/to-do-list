@@ -236,8 +236,14 @@ export function renderTasks(project, filter) {
     // Title of current project
     const projectTitle = document.createElement('h2');
     projectTitle.id = 'project-title';
-    if (project === 'all') {
+
+    if (project === 'all' && filter !== 'today' && filter !== 'thisWeek') {
+
         projectTitle.textContent = 'All tasks';
+    } else if (filter === 'today') {
+        projectTitle.textContent = 'Today';
+    } else if (filter === 'thisWeek') {
+        projectTitle.textContent = 'This week';
     } else {
         projectTitle.textContent = project;
     }
@@ -261,6 +267,7 @@ export function renderTasks(project, filter) {
 
                 return taskYear === todayYear && taskMonth === todayMonth && taskDay === todayDay;
             case 'thisWeek':
+
                 const startOfWeek = new Date(today);
                 startOfWeek.setDate(today.getDate() - today.getDay());
                 startOfWeek.setHours(0, 0, 0, 0);
@@ -271,7 +278,6 @@ export function renderTasks(project, filter) {
 
 
                 const taskDateForComparison = new Date(taskYear, taskMonth, taskDay);
-
                 return taskDateForComparison >= startOfWeek && taskDateForComparison <= endOfWeek;
             case 'all':
             default:
@@ -618,7 +624,7 @@ function todayEventListener() {
     })
 }
 
- function thisWeekEventListener() {
+function thisWeekEventListener() {
 
     const thisWeekLink = document.getElementById('this-week-link');
     thisWeekLink.addEventListener('click', () => {
@@ -627,7 +633,7 @@ function todayEventListener() {
     })
 }
 
- function allTasksEventListener() {
+function allTasksEventListener() {
     const allTasks = document.getElementById('all-tasks-link');
     allTasks.addEventListener('click', () => {
         console.log('yerp');
