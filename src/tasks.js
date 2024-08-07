@@ -369,7 +369,7 @@ export function renderTasks(project, filter) {
     if (tasksToDisplay.length === 0) {
 
         emptySection('Looks like this is empty. Start adding tasks now :)')
-        
+
     }
 
 
@@ -511,7 +511,7 @@ function openEditTaskModal(task, taskIndex) {
     taskModal.appendChild(modalTopBar);
 
 
-    const modalTitle = document.createElement('h4');
+    const modalTitle = document.createElement('h2');
     modalTitle.textContent = 'Edit task';
     modalTopBar.appendChild(modalTitle);
 

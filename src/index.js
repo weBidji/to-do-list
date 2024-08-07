@@ -8,8 +8,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 
-//fix return to all tasks on edit/delete
-
 //style modalS !important
 //styling
 //click signal on nav links

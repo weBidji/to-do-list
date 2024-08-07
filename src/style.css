@@ -493,8 +493,7 @@ form {
 
 /* MODALS */
 
-#task-modal,
-.input-modal {
+#task-modal {
 
     z-index: 2;
     position: absolute;
@@ -503,28 +502,27 @@ form {
     top: 0;
     bottom: 0;
     margin: auto;
-    overflow: hidden;
+    background-color: rgb(240, 240, 240);
 }
 
 dialog {
 
-    border-bottom-left-radius: 12px;
-    border-bottom-right-radius: 12px;
-    border-radius: 8px;
-    border: 1px solid rgb(179, 177, 177);
+    border-radius: 4px;
+    /* border: 1px solid rgb(179, 177, 177); */
+    border: none;
     padding-bottom: 1rem;
     font-size: 1.25rem;
     display: flex;
     flex-direction: column;
     align-items: center;
+    width: 300px;
 
-    animation: slide-in 0.25s ease-in-out;
 
 }
 
 dialog form {
 
-    background-color: white;
+    padding-top: 0.5rem;
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
@@ -535,18 +533,30 @@ dialog form {
 
 #top-bar {
 
-    padding: 0.5rem;
-    background-color: var(--lime-300);
+    padding: 1rem;
+    font-size: 1rem;
+    background-color: var(--lime-800);
+    width: 100%;
+    position: relative;
+    color: white;
+}
+
+#top-bar h2 {
+    border-left: 2px solid white;
+    padding-left: 0.5rem;
 }
 
 #close-button {
 
+    position: absolute;
+    right: 3px;
+    top: 3px;
     height: 25px;
     width: 25px;
-    font-size: 1.125rem;
-    border-radius: 8px;
-    background-color: var(--lime-500);
-    color: red;
+    font-size: 1.5rem;
+    border-radius: 4px;
+    background-color: transparent;
+    color: white;
 }
 
 .form-input {
@@ -610,19 +620,16 @@ label {
     font-size: 1rem;
     border-radius: 8px;
     font-weight: 900;
-    transition: transform 0.1s ease-in-out;
+    transition: transform 0.1s linear;
 }
 
-@keyframes slide-in {
+#submit-btn:hover {
 
-    from {
-        transform: translateX(-500%)
-    }
+    transform: scale(1.05);
 
-    to {
-        transform: translateX(0%);
-    }
 }
+
+
 
 
 

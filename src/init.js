@@ -1,4 +1,4 @@
-import { renderTasks, openModal, deleteTask,  setUpEventListeners, markAsCompleteEventListener } from './tasks.js';
+import { createTaskModal, renderTasks, openModal, deleteTask, setUpEventListeners, markAsCompleteEventListener } from './tasks.js';
 import { projectList, renderProjects, filterProjects } from './projects.js';
 
 export function initializeApp() {
@@ -12,6 +12,8 @@ export function initializeApp() {
     markAsCompleteEventListener();
     deleteTask();
     setUpEventListeners();
+    createTaskModal();
+
 
 }
 
