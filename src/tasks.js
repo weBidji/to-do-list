@@ -142,7 +142,7 @@ export function createTaskModal() {
 
     // Submit button event listener
     submitButton.addEventListener('click', (e) => {
-        if (nameInput.value.trim() === '' || dateInput.value === '') {
+        if (nameInput.value.trim() === '') {
             e.preventDefault();
             alert('Please enter a name for your task. :)')
 
@@ -169,7 +169,7 @@ export function createTaskModal() {
                 renderTasks('all');
             }
 
-            taskModal.remove();
+            closeModal();
         }
     });
 
@@ -193,6 +193,7 @@ export function createTaskModal() {
 
     // Show modal
     taskModal.showModal();
+    nameInput.focus();
 
 }
 
@@ -710,5 +711,14 @@ export function setUpEventListeners() {
     todayEventListener();
     thisWeekEventListener();
     allTasksEventListener();
+}
+
+function closeModal() {
+    let modal = document.getElementById('task-modal');
+    modal.classList.add('slide-out');
+    setTimeout(() => {
+        modal.classList.remove('slide-out');
+        modal.remove();
+    }, 200);
 }
 
