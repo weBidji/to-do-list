@@ -43,7 +43,7 @@ body {
 
 header {
 
-    max-height: 54px;
+   
     grid-row: 1 / 2;
     grid-column: 1 / -1;
     display: flex;
