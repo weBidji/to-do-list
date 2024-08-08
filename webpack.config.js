@@ -6,6 +6,7 @@ module.exports = {
     output: {
         filename: 'main.js',
         path: path.resolve(__dirname, 'dist'),
+        publicPath: '/'
     },
     module: {
 
@@ -44,6 +45,6 @@ module.exports = {
             inject: 'body',
         })
     ],
-    devtool: 'source-map',
+
 };
 
